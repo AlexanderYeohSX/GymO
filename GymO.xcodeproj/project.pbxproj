@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C134BDF021904D9700F1319B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C134BDEF21904D9700F1319B /* AppDelegate.swift */; };
+		C134BDF221904D9700F1319B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C134BDF121904D9700F1319B /* ViewController.swift */; };
+		C134BDF521904D9700F1319B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C134BDF321904D9700F1319B /* Main.storyboard */; };
+		C134BDF721904D9800F1319B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C134BDF621904D9800F1319B /* Assets.xcassets */; };
+		C134BDFA21904D9800F1319B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C134BDF821904D9800F1319B /* LaunchScreen.storyboard */; };
+		C134BE0521904D9900F1319B /* GymOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C134BE0421904D9900F1319B /* GymOTests.swift */; };
+		C134BE1021904D9900F1319B /* GymOUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C134BE0F21904D9900F1319B /* GymOUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C134BE0121904D9800F1319B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C134BDE421904D9700F1319B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C134BDEB21904D9700F1319B;
+			remoteInfo = GymO;
+		};
+		C134BE0C21904D9900F1319B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C134BDE421904D9700F1319B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C134BDEB21904D9700F1319B;
+			remoteInfo = GymO;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C134BDEC21904D9700F1319B /* GymO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C134BDEF21904D9700F1319B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C134BDF121904D9700F1319B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C134BDF421904D9700F1319B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C134BDF621904D9800F1319B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C134BDF921904D9800F1319B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C134BDFB21904D9800F1319B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C134BE0021904D9800F1319B /* GymOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C134BE0421904D9900F1319B /* GymOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymOTests.swift; sourceTree = "<group>"; };
+		C134BE0621904D9900F1319B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C134BE0B21904D9900F1319B /* GymOUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymOUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C134BE0F21904D9900F1319B /* GymOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymOUITests.swift; sourceTree = "<group>"; };
+		C134BE1121904D9900F1319B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C134BDE921904D9700F1319B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BDFD21904D9800F1319B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BE0821904D9900F1319B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C134BDE321904D9700F1319B = {
+			isa = PBXGroup;
+			children = (
+				C134BDEE21904D9700F1319B /* GymO */,
+				C134BE0321904D9900F1319B /* GymOTests */,
+				C134BE0E21904D9900F1319B /* GymOUITests */,
+				C134BDED21904D9700F1319B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C134BDED21904D9700F1319B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C134BDEC21904D9700F1319B /* GymO.app */,
+				C134BE0021904D9800F1319B /* GymOTests.xctest */,
+				C134BE0B21904D9900F1319B /* GymOUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C134BDEE21904D9700F1319B /* GymO */ = {
+			isa = PBXGroup;
+			children = (
+				C134BDEF21904D9700F1319B /* AppDelegate.swift */,
+				C134BDF121904D9700F1319B /* ViewController.swift */,
+				C134BDF321904D9700F1319B /* Main.storyboard */,
+				C134BDF621904D9800F1319B /* Assets.xcassets */,
+				C134BDF821904D9800F1319B /* LaunchScreen.storyboard */,
+				C134BDFB21904D9800F1319B /* Info.plist */,
+			);
+			path = GymO;
+			sourceTree = "<group>";
+		};
+		C134BE0321904D9900F1319B /* GymOTests */ = {
+			isa = PBXGroup;
+			children = (
+				C134BE0421904D9900F1319B /* GymOTests.swift */,
+				C134BE0621904D9900F1319B /* Info.plist */,
+			);
+			path = GymOTests;
+			sourceTree = "<group>";
+		};
+		C134BE0E21904D9900F1319B /* GymOUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C134BE0F21904D9900F1319B /* GymOUITests.swift */,
+				C134BE1121904D9900F1319B /* Info.plist */,
+			);
+			path = GymOUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C134BDEB21904D9700F1319B /* GymO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C134BE1421904D9900F1319B /* Build configuration list for PBXNativeTarget "GymO" */;
+			buildPhases = (
+				C134BDE821904D9700F1319B /* Sources */,
+				C134BDE921904D9700F1319B /* Frameworks */,
+				C134BDEA21904D9700F1319B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GymO;
+			productName = GymO;
+			productReference = C134BDEC21904D9700F1319B /* GymO.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C134BDFF21904D9800F1319B /* GymOTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C134BE1721904D9900F1319B /* Build configuration list for PBXNativeTarget "GymOTests" */;
+			buildPhases = (
+				C134BDFC21904D9800F1319B /* Sources */,
+				C134BDFD21904D9800F1319B /* Frameworks */,
+				C134BDFE21904D9800F1319B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C134BE0221904D9800F1319B /* PBXTargetDependency */,
+			);
+			name = GymOTests;
+			productName = GymOTests;
+			productReference = C134BE0021904D9800F1319B /* GymOTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C134BE0A21904D9900F1319B /* GymOUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C134BE1A21904D9900F1319B /* Build configuration list for PBXNativeTarget "GymOUITests" */;
+			buildPhases = (
+				C134BE0721904D9900F1319B /* Sources */,
+				C134BE0821904D9900F1319B /* Frameworks */,
+				C134BE0921904D9900F1319B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C134BE0D21904D9900F1319B /* PBXTargetDependency */,
+			);
+			name = GymOUITests;
+			productName = GymOUITests;
+			productReference = C134BE0B21904D9900F1319B /* GymOUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C134BDE421904D9700F1319B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = GymO;
+				TargetAttributes = {
+					C134BDEB21904D9700F1319B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					C134BDFF21904D9800F1319B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = C134BDEB21904D9700F1319B;
+					};
+					C134BE0A21904D9900F1319B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = C134BDEB21904D9700F1319B;
+					};
+				};
+			};
+			buildConfigurationList = C134BDE721904D9700F1319B /* Build configuration list for PBXProject "GymO" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C134BDE321904D9700F1319B;
+			productRefGroup = C134BDED21904D9700F1319B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C134BDEB21904D9700F1319B /* GymO */,
+				C134BDFF21904D9800F1319B /* GymOTests */,
+				C134BE0A21904D9900F1319B /* GymOUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C134BDEA21904D9700F1319B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134BDFA21904D9800F1319B /* LaunchScreen.storyboard in Resources */,
+				C134BDF721904D9800F1319B /* Assets.xcassets in Resources */,
+				C134BDF521904D9700F1319B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BDFE21904D9800F1319B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BE0921904D9900F1319B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C134BDE821904D9700F1319B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134BDF221904D9700F1319B /* ViewController.swift in Sources */,
+				C134BDF021904D9700F1319B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BDFC21904D9800F1319B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134BE0521904D9900F1319B /* GymOTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C134BE0721904D9900F1319B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134BE1021904D9900F1319B /* GymOUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C134BE0221904D9800F1319B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C134BDEB21904D9700F1319B /* GymO */;
+			targetProxy = C134BE0121904D9800F1319B /* PBXContainerItemProxy */;
+		};
+		C134BE0D21904D9900F1319B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C134BDEB21904D9700F1319B /* GymO */;
+			targetProxy = C134BE0C21904D9900F1319B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C134BDF321904D9700F1319B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C134BDF421904D9700F1319B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C134BDF821904D9800F1319B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C134BDF921904D9800F1319B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C134BE1221904D9900F1319B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C134BE1321904D9900F1319B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C134BE1521904D9900F1319B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C134BE1621904D9900F1319B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C134BE1821904D9900F1319B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymOTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GymO.app/GymO";
+			};
+			name = Debug;
+		};
+		C134BE1921904D9900F1319B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymOTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GymO.app/GymO";
+			};
+			name = Release;
+		};
+		C134BE1B21904D9900F1319B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymOUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymOUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GymO;
+			};
+			name = Debug;
+		};
+		C134BE1C21904D9900F1319B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 794FA78YH4;
+				INFOPLIST_FILE = GymOUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = GymO.GymOUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GymO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C134BDE721904D9700F1319B /* Build configuration list for PBXProject "GymO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C134BE1221904D9900F1319B /* Debug */,
+				C134BE1321904D9900F1319B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C134BE1421904D9900F1319B /* Build configuration list for PBXNativeTarget "GymO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C134BE1521904D9900F1319B /* Debug */,
+				C134BE1621904D9900F1319B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C134BE1721904D9900F1319B /* Build configuration list for PBXNativeTarget "GymOTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C134BE1821904D9900F1319B /* Debug */,
+				C134BE1921904D9900F1319B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C134BE1A21904D9900F1319B /* Build configuration list for PBXNativeTarget "GymOUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C134BE1B21904D9900F1319B /* Debug */,
+				C134BE1C21904D9900F1319B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C134BDE421904D9700F1319B /* Project object */;
+}
