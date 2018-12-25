@@ -25,6 +25,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     @IBOutlet weak var experience: UITextField!
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var userDescription: UITextField!
+    @IBOutlet weak var gender: UITextField!
     
     @IBAction func uploadPhotoCamera(_ sender: Any)
     {
@@ -61,18 +62,23 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     
     @IBAction func updateProfile(_ sender: Any) {
     
-        let userProfile = User(name: name.text!, age: age.text!, experience: experience.text!, location: location.text!, description: userDescription.text!)
-        let encoder = JSONEncoder()
         
-        do {
-            let data = try encoder.encode(userProfile)
-            Database.database().reference().child("users/\(AuthProvider.Instance.userID())").setValue(String(data: data, encoding: .utf8)!)
-             alertUser(title: "Update Complete!", message: "Your profile has been updated! Yay")
-            print(String(data: data, encoding: .utf8)!)
-        } catch let error{
-            print(error)
-            return
-        }
+        //NOTE: Force unwrapping Int()! for age will be dangerous in the future
+       ProfileStore.shared.setCurrentProfile(as: Profile(name: name.text!, age: Int(age.text!)!, location: location.text!, gender: gender.text! ))
+        
+        ProfileStore.shared.updateCurrentProfile()
+        
+//      OLD CODES//        let encoder = JSONEncoder()
+//
+//        do {
+//            let data = try encoder.encode(userProfile)
+//            Database.database().reference().child("users/\(AuthProvider.Instance.userID())").setValue(String(data: data, encoding: .utf8)!)
+//             alertUser(title: "Update Complete!", message: "Your profile has been updated! Yay")
+//            print(String(data: data, encoding: .utf8)!)
+//        } catch let error{
+//            print(error)
+//            return
+//        }
         
     }
     
@@ -83,6 +89,8 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
             alertUser(title: "Could Not Logged Out", message: "Please Try Again Later")
         }
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

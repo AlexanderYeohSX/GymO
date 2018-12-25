@@ -32,7 +32,8 @@ class SignUpViewController: UIViewController {
                 } else {
                     print("Creating User Complete")
                     //need to change to instantiate the master view controller
-                    self.performSegue(withIdentifier: self.loginSegue, sender: self)                }
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
             
         } else {
@@ -40,6 +41,9 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     private func alertUser(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)

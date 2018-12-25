@@ -50,9 +50,6 @@ class AuthProvider {
                 self.handleErrors(error: error! as NSError, loginHandler: loginHandler)
             } else {
                 if user?.user.uid != nil {
-                   
-                    //store the user to database
-                    DBProvider.Instance.saveUser(withID: (user?.user.uid)!, email: email, password: password)
                     
                     //login the user
                     self.login(withEmail: email, password: password, loginHandler: loginHandler)
@@ -85,6 +82,14 @@ class AuthProvider {
     
     func userID() -> String {
         return Auth.auth().currentUser!.uid;
+    }
+    
+    func userEmail() -> String {
+        if let email = Auth.auth().currentUser?.email{
+         return email
+        } else {
+            fatalError("NO USER EMAIL")
+        }
     }
     
     private func handleErrors(error: NSError, loginHandler: LoginHandler?){

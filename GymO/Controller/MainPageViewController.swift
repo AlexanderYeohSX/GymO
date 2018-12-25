@@ -1,78 +1,137 @@
 //
-//  MainPageViewController.swift
+//  MainViewController.swift
 //  GymO
 //
-//  Created by Catherine on 11/22/18.
+//  Created by Kean Wei Wong on 02/12/2018.
 //  Copyright © 2018 GymO. All rights reserved.
 //
 
 import UIKit
-import Foundation
+import FirebaseStorage
+import Pageboy
 
-
-//NOT USING THIS ONE FOR NOW JUST PUT HERE IN CASE NEED
-class MainPageViewController: UIPageViewController {
+class MainPageViewController: PageboyViewController {
     
+    let storageRef = Storage.storage().reference()
     
-    
-    lazy var subViewControllers:[UIViewController] = {
-        
-        return[
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MasterViewController") as! MasterViewController,
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditViewController") as! EditTableViewController
-        ]
+    lazy var viewControllers: [UIViewController] = {
+        var viewControllers = [UIViewController]()
+        for i in 0 ..< ProfileStore.shared.numberOfProfiles(){
+            viewControllers.append(makeProfileViewController(at: i))
+        }
+        return viewControllers
     }()
     
-    
+
+    @IBOutlet weak var profileImage: UIImageView!
     override func viewDidLoad() {
+        
+        
+        
         super.viewDidLoad()
-        self.delegate = self
+        
+        //Populating array with fake profiles
+        ProfileStore.shared.addProfile(of:Profile(name: "Kean", age: 23, location: "Sunway", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Shafie", age: 24, location: "Sunway", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Kahou", age: 23, location: "I dont go gym", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Jayson", age: 23, location: "Penang", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Alex", age: 23, location: "Sunway", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Winnie", age: 22, location: "Brunei", gender: "Female"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Magdelene", age: 23, location: "Sabah", gender: "Female"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Yolanda", age: 23, location: "Penang", gender: "Female"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Weichoong", age: 23, location: "Penang", gender: "Male"))
+        ProfileStore.shared.addProfile(of:Profile(name: "Ben", age: 23, location: "Clayton", gender: "Male"))
+
+        
         self.dataSource = self
+        //SHafie image
+//       setPicture(uid: AuthProvider.Instance.userID())
         // Do any additional setup after loading the view.
-        setViewControllers([subViewControllers[1]], direction: .forward, animated: true, completion: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(MainPageViewController.enableSwipe), name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(MainPageViewController.disableSwipe), name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-        //print(self.pageViewController(self, viewControllerAfter: MatchViewController))
     }
     
+    func makeProfileViewController(at index: Int?) -> ProfileViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        return storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+    // Funtion to insert picture from Firebase
+//    func setPicture (uid: String) {
+//        let imagesRef = storageRef.child("images")
+//        let userRef = imagesRef.child(uid)
+//        let fileName = uid  + "-profilepic.jpg"
+//        let fileRef = userRef.child(fileName)
+//
+//
+//        fileRef.getData(maxSize: 100 * 1024 * 1024){
+//            (data,error) in
+//
+//
+//            if let error = error {
+//                // Uh-oh, an error occurred!
+//                print(error)
+//            } else {
+//                // Data for "images" is returned
+//                let imageObtained = UIImage(data: data!)!
+//                self.profileImage.image = imageObtained
+//            }
+//        }
+//    }
 }
 
-extension MainPageViewController{
-    @objc func enableSwipe(notification: NSNotification){
-        self.dataSource = self
-        print("allow")
-    }
-    
-    @objc func disableSwipe(notification: NSNotification){
-        self.dataSource = nil
-        print("deny")
-    }
-    
-    func onClick(button senderTitle: String){
-        print("Clicked")
-        //(Doesnt work)     setViewControllers([subViewControllers[0]], direction: .reverse, animated: true, completion: nil)
-    }
-}
-
-extension MainPageViewController:UIPageViewControllerDelegate, UIPageViewControllerDataSource{
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return subViewControllers.count
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
-        let currentIndex:Int = subViewControllers.index(of: viewController) ?? 0
-        if(currentIndex <= 0){
-            return nil
+extension MainPageViewController: PageboyViewControllerDataSource {
+    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
+        
+        //Fatal Error because the app will not function if vc page and profile amount dont tally
+        if viewControllers.count == ProfileStore.shared.numberOfProfiles(){
+            return viewControllers.count
+        }else {
+            fatalError("Number of vc and number of profiles does not tally")
         }
-        return subViewControllers[currentIndex-1]
+        
     }
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print (pageViewController)
-        let currentIndex:Int = subViewControllers.index(of: viewController) ?? 0
-        if(currentIndex >= subViewControllers.count-1){
-            return nil
-        }
-        return subViewControllers[currentIndex+1]
+    
+    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
+        
+        return viewControllers[index]
+        
+        
     }
+    
+    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        return nil
+        
+    }
+    
 }
 
+extension MainPageViewController: PageboyViewControllerDelegate {
+    func pageboyViewController(_ pageboyViewController: PageboyViewController, willScrollToPageAt index: PageboyViewController.PageIndex, direction: PageboyViewController.NavigationDirection, animated: Bool) {
+    }
+    
+    func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollTo position: CGPoint, direction: PageboyViewController.NavigationDirection, animated: Bool) {
+        
+    }
+    
+    func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: PageboyViewController.NavigationDirection, animated: Bool) {
+        
+    }
+    
+    func pageboyViewController(_ pageboyViewController: PageboyViewController, didReloadWith currentViewController: UIViewController, currentPageIndex: PageboyViewController.PageIndex) {
+        
+    }
+    
+    
+    
+   
+}
