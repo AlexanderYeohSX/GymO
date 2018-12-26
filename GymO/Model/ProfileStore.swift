@@ -8,11 +8,13 @@
 
 import Foundation
 import FirebaseDatabase
+import Pageboy
 
 class ProfileStore {
     static let shared = ProfileStore()
     private var profilesCache = [Profile]()
     private var currentProfile: Profile?
+    private let dbRefForUsers = Database.database().reference().child("users")
     
     init(){}
     
@@ -36,13 +38,47 @@ class ProfileStore {
     
     func updateCurrentProfile() {
         
-       let dbRefForUserID = Database.database().reference().child("users").child(AuthProvider.Instance.userID())
-        dbRefForUserID.child("name").setValue(currentProfile?.name)
-        dbRefForUserID.child("age").setValue(currentProfile?.age)
-        dbRefForUserID.child("location").setValue(currentProfile?.location)
-        dbRefForUserID.child("gender").setValue(currentProfile?.gender)
-        dbRefForUserID.child("email").setValue(currentProfile?.email)
-        dbRefForUserID.child("id").setValue(currentProfile?.id)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("name").setValue(currentProfile?.name)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("age").setValue(currentProfile?.age)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("location").setValue(currentProfile?.location)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("gender").setValue(currentProfile?.gender)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("email").setValue(currentProfile?.email)
+        dbRefForUsers.child(AuthProvider.Instance.userID()).child("id").setValue(currentProfile?.id)
+        
+    }
+    
+    func instantiate(for user: String, view: PageboyViewController) {
+        dbRefForUsers.observeSingleEvent(of: .value)
+        { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if let profileDict = value {
+                for profiles in profileDict {
+                    let value2 = profiles.value as? NSDictionary
+                    if let profile = value2 {
+                        if let age = profile["age"] ,
+                            let name = profile["name"] ,
+                            let location = profile["location"] ,
+                            let gender = profile["gender"]
+                            {
+                                let currentID = profiles.key as! String
+                                if currentID == AuthProvider.Instance.userID() {
+                                 self.currentProfile = Profile(name: name as! String,
+                                                                      age: age as! Int,
+                                                                      location: location as! String,
+                                                                      gender: gender as! String)
+                                } else {
+                                    self.profilesCache.append(Profile(name: name as! String,
+                                                             age: age as! Int,
+                                                             location: location as! String,
+                                                             gender: gender as! String))
+                                }
+                        }
+                    }
+                }
+            }
+            
+            view.reloadData()
+        }
     }
 }
 

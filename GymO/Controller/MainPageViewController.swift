@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseStorage
+import Firebase
 import Pageboy
 
 class MainPageViewController: PageboyViewController {
@@ -19,34 +19,28 @@ class MainPageViewController: PageboyViewController {
         for i in 0 ..< ProfileStore.shared.numberOfProfiles(){
             viewControllers.append(makeProfileViewController(at: i))
         }
+
         return viewControllers
     }()
     
 
     @IBOutlet weak var profileImage: UIImageView!
     override func viewDidLoad() {
-        
-        
-        
+    
         super.viewDidLoad()
         
-        //Populating array with fake profiles
-        ProfileStore.shared.addProfile(of:Profile(name: "Kean", age: 23, location: "Sunway", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Shafie", age: 24, location: "Sunway", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Kahou", age: 23, location: "I dont go gym", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Jayson", age: 23, location: "Penang", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Alex", age: 23, location: "Sunway", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Winnie", age: 22, location: "Brunei", gender: "Female"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Magdelene", age: 23, location: "Sabah", gender: "Female"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Yolanda", age: 23, location: "Penang", gender: "Female"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Weichoong", age: 23, location: "Penang", gender: "Male"))
-        ProfileStore.shared.addProfile(of:Profile(name: "Ben", age: 23, location: "Clayton", gender: "Male"))
+        
+        let currentVC = self
+        ProfileStore.shared.instantiate(for: AuthProvider.Instance.userID(), view: currentVC)
+        
+
 
         
         self.dataSource = self
         //SHafie image
 //       setPicture(uid: AuthProvider.Instance.userID())
         // Do any additional setup after loading the view.
+    
     }
     
     func makeProfileViewController(at index: Int?) -> ProfileViewController {
@@ -92,12 +86,9 @@ class MainPageViewController: PageboyViewController {
 extension MainPageViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         
-        //Fatal Error because the app will not function if vc page and profile amount dont tally
-        if viewControllers.count == ProfileStore.shared.numberOfProfiles(){
-            return viewControllers.count
-        }else {
-            fatalError("Number of vc and number of profiles does not tally")
-        }
+        
+        return ProfileStore.shared.numberOfProfiles()
+        
         
     }
     
@@ -135,3 +126,16 @@ extension MainPageViewController: PageboyViewControllerDelegate {
     
    
 }
+
+//Fake Profiles
+
+//        ProfileStore.shared.addProfile(of:Profile(name: "Kean", age: 23, location: "Sunway", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Shafie", age: 24, location: "Sunway", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Kahou", age: 23, location: "I dont go gym", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Jayson", age: 23, location: "Penang", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Alex", age: 23, location: "Sunway", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Winnie", age: 22, location: "Brunei", gender: "Female"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Magdelene", age: 23, location: "Sabah", gender: "Female"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Yolanda", age: 23, location: "Penang", gender: "Female"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Weichoong", age: 23, location: "Penang", gender: "Male"))
+//        ProfileStore.shared.addProfile(of:Profile(name: "Ben", age: 23, location: "Clayton", gender: "Male"))

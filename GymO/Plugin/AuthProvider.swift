@@ -28,8 +28,6 @@ class AuthProvider {
         return _instance
     }
     
-    var userName = "";
-    
     func login(withEmail email: String, password: String, loginHandler: LoginHandler?){
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in

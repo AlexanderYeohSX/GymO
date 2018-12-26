@@ -50,7 +50,6 @@ class ProfileViewController: UIViewController {
         if let index = (parentVC)?.viewControllers.index(of: self) {
             print(index)
             
-            
             indexOfPage = index
         }
     }
