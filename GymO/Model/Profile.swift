@@ -12,12 +12,13 @@ import UIKit
 class Profile {
     
     var email: String = ""
-    let id: String?
+    var id: String = ""
     var name: String
     var age: Int
 //    var experience: String = ""
     var location: String?
     var gender: String
+    let addedFriends: [String] = ["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
 //    var description: String?
     
    /* var image: UIImage? {
@@ -29,13 +30,13 @@ class Profile {
         }
     }*/
     
-    init (name: String, age: Int, location: String, gender: String) {
+    init (name: String, age: Int, location: String, gender: String, id: String) {
         
         self.name = name
         self.age = age
         self.location = location
         self.gender = gender
-        self.id = AuthProvider.Instance.userID() //MIGHT FAIL DUE TO NO CURRENT USER/NO INTERNET
+        self.id = id //MIGHT FAIL DUE TO NO CURRENT USER/NO INTERNET
         self.email = AuthProvider.Instance.userEmail() //MIGHT FAIL DUE TO NO CURRENT USER/NO INTERNET
     }
     /*init(email: String, id: String) {

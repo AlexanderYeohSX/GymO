@@ -64,7 +64,13 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     
         
         //NOTE: Force unwrapping Int()! for age will be dangerous in the future
-       ProfileStore.shared.setCurrentProfile(as: Profile(name: name.text!, age: Int(age.text!)!, location: location.text!, gender: gender.text! ))
+        ProfileStore.shared.setCurrentProfile(as:
+            Profile(name: name.text!,
+                    age: Int(age.text!)!,
+                    location: location.text!,
+                    gender: gender.text!,
+                    id: AuthProvider.Instance.userID()
+        ))
         
         ProfileStore.shared.updateCurrentProfile()
         

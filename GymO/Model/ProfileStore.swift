@@ -28,6 +28,16 @@ class ProfileStore {
         return profilesCache[index]
     }
     
+    func getProfile(for id: String) -> Profile? {
+        for profiles in profilesCache {
+            if profiles.id == id {
+                return profiles
+            }
+        }
+        
+        return nil
+    }
+    
     func numberOfProfiles() -> Int {
         return profilesCache.count
     }
@@ -36,7 +46,13 @@ class ProfileStore {
         currentProfile = user
     }
     
+    func getCurrentProfile() -> Profile? {
+        return currentProfile
+    }
+    
     func updateCurrentProfile() {
+        
+        
         
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("name").setValue(currentProfile?.name)
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("age").setValue(currentProfile?.age)
@@ -58,19 +74,24 @@ class ProfileStore {
                         if let age = profile["age"] ,
                             let name = profile["name"] ,
                             let location = profile["location"] ,
-                            let gender = profile["gender"]
+                            let gender = profile["gender"],
+                            let id = profile["id"]
                             {
                                 let currentID = profiles.key as! String
                                 if currentID == AuthProvider.Instance.userID() {
                                  self.currentProfile = Profile(name: name as! String,
                                                                       age: age as! Int,
                                                                       location: location as! String,
-                                                                      gender: gender as! String)
+                                                                      gender: gender as! String,
+                                                                      id: id as! String)
+
                                 } else {
                                     self.profilesCache.append(Profile(name: name as! String,
                                                              age: age as! Int,
                                                              location: location as! String,
-                                                             gender: gender as! String))
+                                                             gender: gender as! String,
+                                                             id: id as! String
+                                                             ))
                                 }
                         }
                     }

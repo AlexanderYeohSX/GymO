@@ -147,9 +147,14 @@
                         <viewLayoutGuide key="safeArea" id="JjD-Bn-Px5"/>
                     </view>
                     <navigationItem key="navigationItem" title="GymO" id="Pih-Z4-jRJ">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Tf9-ep-h3v">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Tf9-ep-h3v">
                             <connections>
                                 <segue destination="FZ8-SI-78z" kind="show" id="WyM-Tk-2QE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Message" id="bSm-wf-rPy">
+                            <connections>
+                                <segue destination="OSc-fY-41L" kind="show" id="IIY-QE-LDp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -157,6 +162,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tp2-of-O1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1009" y="27"/>
+        </scene>
+        <!--Buddies-->
+        <scene sceneID="V7q-Dp-7e4">
+            <objects>
+                <tableViewController title="Buddies" id="OSc-fY-41L" customClass="ChatHomeTableViewController" customModule="GymO" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6dG-TN-qmy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="matchedCell" textLabel="tDS-7r-ZPP" style="IBUITableViewCellStyleDefault" id="fuY-R1-SEx">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fuY-R1-SEx" id="C3I-fT-tId">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tDS-7r-ZPP">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="NL6-pg-kYw" kind="show" identifier="goToChat" id="y2d-2v-QRX"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OSc-fY-41L" id="S1m-Gz-o6i"/>
+                            <outlet property="delegate" destination="OSc-fY-41L" id="PXa-JR-iwZ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B3R-fe-G49" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2062" y="-729"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="R8J-CT-PN7">
+            <objects>
+                <viewController title="Chat" id="NL6-pg-kYw" customClass="ChatViewController" customModule="GymO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4pL-re-FlR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="fHl-RQ-f3I"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpt-0m-Z9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3127" y="-729"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="ssl-lP-QsW">
@@ -494,6 +554,6 @@
         <image name="logo" width="244" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xl9-rl-ifS"/>
+        <segue reference="cWq-d1-gcM"/>
     </inferredMetricsTieBreakers>
 </document>
