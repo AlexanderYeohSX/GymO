@@ -16,7 +16,7 @@ class ChatViewController: MessagesViewController {
         return MessageStore.instance.getMessages()
     }
     var receiver: String = "No Receiver"
-    
+    var profileDisplayed: Profile?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +25,10 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        self.title = receiver
+        
+        if let chatProfile = profileDisplayed {
+            self.title = chatProfile.name
+        }
     }
     
 

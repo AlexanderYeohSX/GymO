@@ -18,7 +18,8 @@ class Profile {
 //    var experience: String = ""
     var location: String?
     var gender: String
-    let addedFriends: [String] = ["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
+    var matchedUsers: [String] = []
+//["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
 //    var description: String?
     
    /* var image: UIImage? {

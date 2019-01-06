@@ -15,6 +15,7 @@ class ProfileStore {
     private var profilesCache = [Profile]()
     private var currentProfile: Profile?
     private let dbRefForUsers = Database.database().reference().child("users")
+    private var addedProfilesCache = [Profile]()
     
     init(){}
     
@@ -34,7 +35,6 @@ class ProfileStore {
                 return profiles
             }
         }
-        
         return nil
     }
     
@@ -50,20 +50,53 @@ class ProfileStore {
         return currentProfile
     }
     
-    func updateCurrentProfile() {
+    
+    func addMatchedBuddy(id: String) {
         
-        
-        
+        for friend in (currentProfile?.matchedUsers)! {
+            if friend == id {
+                return
+            }
+        }
+
+        currentProfile?.matchedUsers.append(id)
+        updateCurrentProfileDb(for: .matchedUsers)
+    }
+    
+    func setupCurrentProfileDb() {
+    
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("name").setValue(currentProfile?.name)
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("age").setValue(currentProfile?.age)
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("location").setValue(currentProfile?.location)
+    dbRefForUsers.child(AuthProvider.Instance.userID()).child("location").setValue(currentProfile?.location)
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("gender").setValue(currentProfile?.gender)
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("email").setValue(currentProfile?.email)
         dbRefForUsers.child(AuthProvider.Instance.userID()).child("id").setValue(currentProfile?.id)
         
     }
     
-    func instantiate(for user: String, view: PageboyViewController) {
+    func updateCurrentProfileDb(for property: ProfileProperty){
+        
+        let uid = AuthProvider.Instance.userID()
+        
+        switch property{
+        case .name:
+            dbRefForUsers.child(uid).child("name").setValue(currentProfile?.name)
+        case .age:
+            dbRefForUsers.child(uid).child("age").setValue(currentProfile?.age)
+        case .email:
+            dbRefForUsers.child(uid).child("email").setValue(currentProfile?.email)
+        case .gender:
+            dbRefForUsers.child(uid).child("gender").setValue(currentProfile?.gender)
+        case .id:
+            dbRefForUsers.child(uid).child("id").setValue(currentProfile?.id)
+        case .location:
+            dbRefForUsers.child(uid).child("location").setValue(currentProfile?.location)
+        case .matchedUsers:
+            dbRefForUsers.child(uid).child("matchedUsers").setValue(currentProfile?.matchedUsers)
+        }
+    }
+    
+    func instantiateProfileCache(for user: String, view: PageboyViewController) {
         dbRefForUsers.observeSingleEvent(of: .value)
         { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -79,11 +112,14 @@ class ProfileStore {
                             {
                                 let currentID = profiles.key as! String
                                 if currentID == AuthProvider.Instance.userID() {
-                                 self.currentProfile = Profile(name: name as! String,
-                                                                      age: age as! Int,
-                                                                      location: location as! String,
-                                                                      gender: gender as! String,
-                                                                      id: id as! String)
+                                self.currentProfile = Profile(name: name as! String,
+                                                                    age: age as! Int,
+                                                                    location: location as! String,
+                                                                    gender: gender as! String,
+                                                                    id: id as! String)
+                                    if let matchedUsers = profile["matchedUsers"] {
+                                        self.currentProfile?.matchedUsers = matchedUsers as! [String]
+                                    }
 
                                 } else {
                                     self.profilesCache.append(Profile(name: name as! String,
@@ -97,13 +133,18 @@ class ProfileStore {
                     }
                 }
             }
-            
+            print("Firebase Completed")
             view.reloadData()
         }
     }
+    
 }
 
-
+enum ProfileType {
+    case currentUser
+    case profilesCache
+    case addedProfiles
+}
 
 //MARK: - Reference only
 //class ProfileStore {
@@ -161,3 +202,12 @@ class ProfileStore {
 //    case cannotSaveImage(UIImage?)
 //}
 
+enum ProfileProperty {
+    case name
+    case age
+    case location
+    case gender
+    case email
+    case id
+    case matchedUsers
+}

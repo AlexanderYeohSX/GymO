@@ -14,6 +14,14 @@ class MainPageViewController: PageboyViewController {
     
     let storageRef = Storage.storage().reference()
     
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var profileView: UIView!
+    
+    @IBOutlet weak var matchButton: UIButton!
+    
     lazy var viewControllers: [UIViewController] = {
         var viewControllers = [UIViewController]()
         for i in 0 ..< ProfileStore.shared.numberOfProfiles(){
@@ -23,6 +31,14 @@ class MainPageViewController: PageboyViewController {
         return viewControllers
     }()
     
+   
+    @IBAction func matchButtonPressed(_ sender: UIButton) {
+        
+        ProfileStore.shared.addMatchedBuddy(id: ProfileStore.shared.getProfile(at: sender.tag).id)
+        self.performSegue(withIdentifier: "GoToChat", sender: sender)
+    
+    }
+    
 
     @IBOutlet weak var profileImage: UIImageView!
     override func viewDidLoad() {
@@ -31,12 +47,10 @@ class MainPageViewController: PageboyViewController {
         
         
         let currentVC = self
-        ProfileStore.shared.instantiate(for: AuthProvider.Instance.userID(), view: currentVC)
-        
-
-
+        ProfileStore.shared.instantiateProfileCache(for: AuthProvider.Instance.userID(), view: currentVC)
         
         self.dataSource = self
+        profileView.layer.cornerRadius = 35 //Use Division method for autolayout
         //SHafie image
 //       setPicture(uid: AuthProvider.Instance.userID())
         // Do any additional setup after loading the view.
@@ -48,7 +62,36 @@ class MainPageViewController: PageboyViewController {
         return storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
     }
     
+    func updateUI(at index: Int) {
+        let profileDisplayed = ProfileStore.shared.getProfile(at: index)
+                if profileDisplayed.id != ProfileStore.shared.getCurrentProfile()?.id {
+                    nameLabel.text = profileDisplayed.name
+                    ageLabel.text = String(profileDisplayed.age)
+                    locationLabel.text = profileDisplayed.location
+                }
+        
+        matchButton.isHidden = false
+        matchButton.tag = index
+        
+    }
 
+    func transitioningUI() {
+        nameLabel.text = ""
+        ageLabel.text = ""
+        locationLabel.text = ""
+        matchButton.isHidden = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        if segue.identifier == "GoToChat" {
+            let matchedUser = sender as! UIButton
+            let destinationVC = segue.destination as! ChatViewController
+            destinationVC.receiver = ProfileStore.shared.getProfile(at: matchedUser.tag).name
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -84,22 +127,21 @@ class MainPageViewController: PageboyViewController {
 }
 
 extension MainPageViewController: PageboyViewControllerDataSource {
+    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         
-        
         return ProfileStore.shared.numberOfProfiles()
-        
         
     }
     
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
         
         return viewControllers[index]
-        
-        
+    
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        
         return nil
         
     }
@@ -122,10 +164,8 @@ extension MainPageViewController: PageboyViewControllerDelegate {
         
     }
     
-    
-    
-   
 }
+
 
 //Fake Profiles
 
@@ -139,3 +179,4 @@ extension MainPageViewController: PageboyViewControllerDelegate {
 //        ProfileStore.shared.addProfile(of:Profile(name: "Yolanda", age: 23, location: "Penang", gender: "Female"))
 //        ProfileStore.shared.addProfile(of:Profile(name: "Weichoong", age: 23, location: "Penang", gender: "Male"))
 //        ProfileStore.shared.addProfile(of:Profile(name: "Ben", age: 23, location: "Clayton", gender: "Male"))
+

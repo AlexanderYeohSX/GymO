@@ -72,7 +72,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
                     id: AuthProvider.Instance.userID()
         ))
         
-        ProfileStore.shared.updateCurrentProfile()
+        ProfileStore.shared.setupCurrentProfileDb()
         
 //      OLD CODES//        let encoder = JSONEncoder()
 //
@@ -99,12 +99,6 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -181,18 +175,18 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
         present(alert, animated: true, completion: nil)
     }
     
-    
-    func jsonToString(json: AnyObject){
-        do {
-            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
-            let convertedString = String(data: data1, encoding: String.Encoding.utf8) // the data will be converted to the string
-            print(convertedString!) // <-- here is ur string
-            
-        } catch let myJSONError {
-            print(myJSONError)
-        }
-        
-    }
+    // NO USE DAO
+//    func jsonToString(json: AnyObject){
+//        do {
+//            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
+//            let convertedString = String(data: data1, encoding: String.Encoding.utf8) // the data will be converted to the string
+//            print(convertedString!) // <-- here is ur string
+//
+//        } catch let myJSONError {
+//            print(myJSONError)
+//        }
+//
+//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
        

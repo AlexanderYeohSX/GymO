@@ -10,31 +10,35 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    private var indexOfPage: Int?
     private var parentVC: MainPageViewController?
-    private var profileDisplayed:Profile?
-    
-    @IBOutlet weak var nameLabel: UILabel! 
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    
     @IBOutlet weak var profileImage: UIImageView!
+    private var profileDisplayed: Profile?
+    var currentIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parentVC = parentPageboy as? MainPageViewController
+        if let currentIndex = parentVC?.viewControllers.index(of: self) {
         
-        
-        updateIndex()
-        if let index = indexOfPage {
-            profileDisplayed = ProfileStore.shared.getProfile(at: index)
+            profileDisplayed = ProfileStore.shared.getProfile(at: currentIndex)
+        } else {
+            print("Error, index not found")
         }
-        print(profileDisplayed?.name)
-        updateUI()
-        
-        // Do any additional setup after loading the view.
+        print("view loaded for \(profileDisplayed?.name)")
+       updateUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+
+        parentVC?.updateUI(at: (parentVC?.viewControllers.index(of: self))!)
+    }
+    
+   
+    
+    override func viewWillDisappear(_ animated: Bool) {
+    
+        parentVC?.transitioningUI()
+    }
 
     /*
     // MARK: - Navigation
@@ -46,27 +50,14 @@ class ProfileViewController: UIViewController {
     }
     */
     
-    private func updateIndex() {
-        if let index = (parentVC)?.viewControllers.index(of: self) {
-            print(index)
-            
-            indexOfPage = index
-        }
-    }
+   
     
-    private func updateUI() {
-        if profileDisplayed != nil {
-            nameLabel.text = profileDisplayed?.name
-            ageLabel.text = String(profileDisplayed!.age)
-            locationLabel.text = profileDisplayed?.location
-            
-            if profileDisplayed?.gender == "Male" {
-                
-                profileImage.image = UIImage(imageLiteralResourceName: "male-default")
-            } else if profileDisplayed?.gender == "Female" {
-                profileImage.image = UIImage(imageLiteralResourceName: "female-default")
-            }
-            
+    private func updateUI(){
+
+        if profileDisplayed?.gender == "Male" {
+            profileImage.image = UIImage(imageLiteralResourceName: "male-default")
+        } else if profileDisplayed?.gender == "Female" {
+            profileImage.image = UIImage(imageLiteralResourceName: "female-default")
         }
         
     }

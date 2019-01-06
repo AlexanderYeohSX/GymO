@@ -1,17 +1,54 @@
 //
-//  ChatHomeTableViewController.swift
+//  FirstCustomizationTableTViewController.swift
 //  GymO
 //
-//  Created by Kean Wei Wong on 27/12/2018.
-//  Copyright © 2018 GymO. All rights reserved.
+//  Created by Kean Wei Wong on 02/01/2019.
+//  Copyright © 2019 GymO. All rights reserved.
 //
 
 import UIKit
 
-class ChatHomeTableViewController: UITableViewController {
+class FirstCustomizationTableTViewController: UITableViewController {
 
-    //To be changed to accepted people
-    let friends = ProfileStore.shared.getCurrentProfile()?.matchedUsers ?? []
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var age: UITextField!
+    @IBOutlet weak var experience: UITextField!
+    @IBOutlet weak var location: UITextField!
+    @IBOutlet weak var userDescription: UITextField!
+    @IBOutlet weak var gender: UITextField!
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+
+        if name.text != "", age.text != "", location.text != "", gender.text != "" {
+            ProfileStore.shared.setCurrentProfile(as:
+                Profile(name: name.text!,
+                        age: Int(age.text!)!,
+                        location: location.text!,
+                        gender: gender.text!,
+                        id: AuthProvider.Instance.userID()
+            ))
+            
+            ProfileStore.shared.setupCurrentProfileDb()
+            dismiss(animated: true, completion: nil)
+            
+        } else {
+            
+            print("Error Doing First Time Customization")
+        }
+        
+
+   
+    }
+    
+    
+    @IBAction func updateProfile(_ sender: Any) {
+        
+        
+        //NOTE: Force unwrapping Int()! for age will be dangerous in the future
+        
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,35 +64,23 @@ class ChatHomeTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return friends.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "matchedCell", for: indexPath)
-        cell.tag = indexPath.row
-        cell.textLabel?.text = ProfileStore.shared.getProfile(for: friends[indexPath.row])?.name
-        //print(ProfileStore.shared.getProfile(for: friends[indexPath.row])?)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
         // Configure the cell...
 
         return cell
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        if segue.identifier == "GoToChat" {
-            let cellSelected = sender as! UITableViewCell
-            let destinationVC = segue.destination as! ChatViewController
-            destinationVC.profileDisplayed = ProfileStore.shared.getProfile(for: friends[cellSelected.tag])
-        }
-        
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

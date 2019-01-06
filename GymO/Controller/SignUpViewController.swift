@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SignUpViewController: UIViewController {
     
     private let loginSegue = "LoginSegue"
@@ -32,7 +33,8 @@ class SignUpViewController: UIViewController {
                 } else {
                     print("Creating User Complete")
                     //need to change to instantiate the master view controller
-                    self.dismiss(animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "GoToFirstCustomization", sender: nil)
+                    //self.dismiss(animated: true, completion: nil)
                 }
             }
             
