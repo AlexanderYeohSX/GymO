@@ -61,6 +61,7 @@ class ProfileStore {
 
         currentProfile?.matchedUsers.append(id)
         updateCurrentProfileDb(for: .matchedUsers)
+        updateMatchedProfileDb(id: id)
     }
     
     func setupCurrentProfileDb() {
@@ -95,55 +96,112 @@ class ProfileStore {
             dbRefForUsers.child(uid).child("matchedUsers").setValue(currentProfile?.matchedUsers)
         }
     }
+
+    func updateMatchedProfileDb(id: String) {
+        
+        let date = Date()
+        dbRefForUsers.child(id).child("addedBy").child((currentProfile?.id)!).child("date").setValue(date.description)
+    }
     
     func instantiateProfileCache(for user: String, view: PageboyViewController) {
         dbRefForUsers.observeSingleEvent(of: .value)
         { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if let profileDict = value {
-                for profiles in profileDict {
-                    let value2 = profiles.value as? NSDictionary
-                    if let profile = value2 {
-                        if let age = profile["age"] ,
-                            let name = profile["name"] ,
-                            let location = profile["location"] ,
-                            let gender = profile["gender"],
-                            let id = profile["id"]
-                            {
-                                let currentID = profiles.key as! String
-                                if currentID == AuthProvider.Instance.userID() {
-                                self.currentProfile = Profile(name: name as! String,
-                                                                    age: age as! Int,
-                                                                    location: location as! String,
-                                                                    gender: gender as! String,
-                                                                    id: id as! String)
-                                    if let matchedUsers = profile["matchedUsers"] {
-                                        self.currentProfile?.matchedUsers = matchedUsers as! [String]
-                                    }
+                
+                self.queryDatabase(profileDict: profileDict, profileType: .currentUser)
+                self.queryDatabase(profileDict: profileDict, profileType: .notCurrentUser)
 
-                                } else {
-                                    self.profilesCache.append(Profile(name: name as! String,
-                                                             age: age as! Int,
-                                                             location: location as! String,
-                                                             gender: gender as! String,
-                                                             id: id as! String
-                                                             ))
-                                }
-                        }
-                    }
-                }
             }
             print("Firebase Completed")
             view.reloadData()
         }
     }
     
+    func queryDatabase(profileDict: NSDictionary, profileType: ProfileType) {
+        for profiles in profileDict {
+            
+            let currentID = profiles.key as! String
+            let value2 = profiles.value as? NSDictionary
+            if let profile = value2 {
+                if let age = profile["age"] ,
+                    let name = profile["name"] ,
+                    let location = profile["location"] ,
+                    let gender = profile["gender"],
+                    let id = profile["id"]
+                {
+                    switch profileType{
+                    case .currentUser:
+                        
+                        if currentID == AuthProvider.Instance.userID() {
+                            self.currentProfile = Profile(name: name as! String,
+                                                          age: age as! Int,
+                                                          location: location as! String,
+                                                          gender: gender as! String,
+                                                          id: id as! String)
+                            if let matchedUsers = profile["matchedUsers"] {
+                                self.currentProfile?.matchedUsers = matchedUsers as! [String]
+                            }
+                            
+                            if let addedBy = profile["addedBy"] as? NSDictionary {
+                                for addedByUsers in addedBy {
+                                
+                                   let addedByUserID = addedByUsers.key as! String
+                                    let value3 = addedByUsers.value as? NSDictionary
+                                    if let addedByUser = value3 {
+                                        guard let dateAdded = addedByUser["date"] else {
+                                            fatalError("Added user Date in Database does not exist")
+                                        }
+                                        
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                                        let dateAddedDateFormat = dateFormatter.date(from: dateAdded as! String)
+                                        
+                                        var requestSender = RequestSender.init(id: addedByUserID, date: dateAddedDateFormat!, accepted: nil)
+                                        
+                                        if let accepted = addedByUser["accepted"] {
+                                            requestSender.accepted = accepted as? Bool
+                                        }
+                                        
+                                        self.currentProfile?.addedBy.append(requestSender)
+                                        print( self.currentProfile?.addedBy)
+
+                                    }
+                                    
+                                //    self.currentProfile?.addedBy.append(RequestSender)
+                                }
+                            }
+                            
+                        }
+                    case .notCurrentUser:
+                        
+                        if let matchedUsers = self.currentProfile?.matchedUsers {
+                       
+                            if matchedUsers.contains(currentID) {
+                                addedProfilesCache.append(Profile(name: name as! String,
+                                                                  age: age as! Int,
+                                                                  location: location as! String,
+                                                                  gender: gender as! String,
+                                                                  id: id as! String))
+                            } else if currentID != AuthProvider.Instance.userID() {
+                                self.profilesCache.append(Profile(name: name as! String,
+                                                                  age: age as! Int,
+                                                                  location: location as! String,
+                                                                  gender: gender as! String,
+                                                                  id: id as! String))
+                            }
+                        }
+                     
+                    }
+                }
+            }
+        }
+    }
 }
 
 enum ProfileType {
     case currentUser
-    case profilesCache
-    case addedProfiles
+    case notCurrentUser
 }
 
 //MARK: - Reference only

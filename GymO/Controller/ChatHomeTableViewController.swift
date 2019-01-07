@@ -39,6 +39,8 @@ class ChatHomeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "matchedCell", for: indexPath)
         cell.tag = indexPath.row
+        
+        //CHANGE TO GET ADDED PROFILE
         cell.textLabel?.text = ProfileStore.shared.getProfile(for: friends[indexPath.row])?.name
         //print(ProfileStore.shared.getProfile(for: friends[indexPath.row])?)
         // Configure the cell...

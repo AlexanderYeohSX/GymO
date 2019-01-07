@@ -19,6 +19,7 @@ class Profile {
     var location: String?
     var gender: String
     var matchedUsers: [String] = []
+    var addedBy = [RequestSender]()
 //["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
 //    var description: String?
     
@@ -46,3 +47,10 @@ class Profile {
     }*/
 }
 
+struct RequestSender {
+    
+    let id: String
+    var date: Date
+    var accepted: Bool?
+    
+}
