@@ -48,7 +48,7 @@ class MainPageViewController: PageboyViewController {
         
         let currentVC = self
         ProfileStore.shared.instantiateProfileCache(for: AuthProvider.Instance.userID(), view: currentVC)
-        
+       
         self.dataSource = self
         profileView.layer.cornerRadius = 35 //Use Division method for autolayout
         //SHafie image

@@ -90,7 +90,11 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     
     @IBAction func logOut(_ sender: Any) {
         if AuthProvider.Instance.logOut(){
+            //IF ERROR SAYING NO CURRENT PROFILE OR PROFILE CACHE EMPTY DEBUG FROM HERE.
+            ProfileStore.shared.clearSession()
+            
             dismiss(animated: true, completion: nil)
+
         } else {
             alertUser(title: "Could Not Logged Out", message: "Please Try Again Later")
         }
@@ -101,72 +105,6 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
         super.viewDidLoad()
     }
 
-    // MARK: - Table view data source
-
-   /* override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }*/
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     private func alertUser(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -213,46 +151,12 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
          print(image.size)
         // print out the image size as a test
         
-        uploadImage(image: image)
+        ProfileStore.shared.uploadImageForCurrentUser(with: image)
         picker.dismiss(animated: true)
 
     }
     
     func uploadImage(image: UIImage) {
-        let storageRef = Storage.storage().reference()
-        let imagesRef = storageRef.child("images")
-        let userID = AuthProvider.Instance.userID()
-        let userRef = imagesRef.child(userID)
-        let data = image.pngData()
-        let fileName = userID  + "-profilepic.jpg"
-        let fileRef = userRef.child(fileName)
-        
-        
-        // Upload the file to the firebase
-        if let data = data {
-            print("a")
-            fileRef.putData(data, metadata: nil) { (metadata, error) in
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    print(error!)
-                    return
-                }
-                print(metadata)
-                // Metadata contains file metadata such as size, content-type.
-                // You can also access to download URL after upload.
-                fileRef.downloadURL { (url, error) in
-                    guard let downloadURL = url else {
-                        // Uh-oh, an error occurred!
-                        
-                        print(error!)
-                        return
-                    }
-                    print(downloadURL)
-                }
-            }
-            
-        }
+      
     }
-    
-
 }

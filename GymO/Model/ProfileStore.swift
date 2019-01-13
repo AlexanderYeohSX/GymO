@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import Pageboy
+import FirebaseStorage
 
 class ProfileStore {
     static let shared = ProfileStore()
@@ -16,6 +17,7 @@ class ProfileStore {
     private var currentProfile: Profile?
     private let dbRefForUsers = Database.database().reference().child("users")
     private var addedProfilesCache = [Profile]()
+    private var requestProfilesCache = [Profile]()
     
     init(){}
     
@@ -32,6 +34,17 @@ class ProfileStore {
     func getProfile(for id: String) -> Profile? {
         for profiles in profilesCache {
             if profiles.id == id {
+                return profiles
+            }
+        }
+        return nil
+    }
+    
+    func getRequestedProfile(for id: String) -> Profile? {
+        
+        for profiles in requestProfilesCache {
+            if profiles.id == id {
+                
                 return profiles
             }
         }
@@ -113,9 +126,17 @@ class ProfileStore {
                 self.queryDatabase(profileDict: profileDict, profileType: .notCurrentUser)
 
             }
-            print("Firebase Completed")
+             print("main view loaded for \(ProfileStore.shared.getCurrentProfile()?.name)")
             view.reloadData()
         }
+    }
+    
+    func clearSession(){
+        
+        profilesCache = []
+        currentProfile =  nil
+        addedProfilesCache = []
+        requestProfilesCache = []
     }
     
     func queryDatabase(profileDict: NSDictionary, profileType: ProfileType) {
@@ -175,15 +196,28 @@ class ProfileStore {
                         }
                     case .notCurrentUser:
                         
+                        let allRequestSenders = ProfileStore.shared.currentProfile?.getAllRequestSender()
+                        
                         if let matchedUsers = self.currentProfile?.matchedUsers {
                        
+                            print(currentID)
                             if matchedUsers.contains(currentID) {
                                 addedProfilesCache.append(Profile(name: name as! String,
                                                                   age: age as! Int,
                                                                   location: location as! String,
                                                                   gender: gender as! String,
                                                                   id: id as! String))
-                            } else if currentID != AuthProvider.Instance.userID() {
+                            } else if (allRequestSenders?.contains(currentID))!{
+                                requestProfilesCache.append(Profile(name: name as! String,
+                                                                  age: age as! Int,
+                                                                  location: location as! String,
+                                                                  gender: gender as! String,
+                                                                  id: id as! String))
+                                print("added \(name as! String)")
+                            }
+                            
+                                
+                            else if currentID != AuthProvider.Instance.userID() {
                                 self.profilesCache.append(Profile(name: name as! String,
                                                                   age: age as! Int,
                                                                   location: location as! String,
@@ -195,6 +229,43 @@ class ProfileStore {
                     }
                 }
             }
+        }
+    }
+    
+    func uploadImageForCurrentUser(with image: UIImage) {
+        let storageRef = Storage.storage().reference()
+        let imagesRef = storageRef.child("images")
+        let userID = AuthProvider.Instance.userID()
+        let userRef = imagesRef.child(userID)
+        let data = image.jpegData(compressionQuality: 1.0)
+        let fileName = userID  + "-00.jpg"
+        let fileRef = userRef.child(fileName)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        // Upload the file to the firebase
+        if let data = data {
+            print("a")
+            let uploadTask = fileRef.putData(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    print(error!)
+                    return
+                }
+                print(metadata)
+                // Metadata contains file metadata such as size, content-type.
+                // You can also access to download URL after upload.
+            }
+            
+            uploadTask.observe(.progress) { (snapshot) in
+               
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+                    / Double(snapshot.progress!.totalUnitCount)
+                
+                print(percentComplete)
+            }
+            
+            
         }
     }
 }

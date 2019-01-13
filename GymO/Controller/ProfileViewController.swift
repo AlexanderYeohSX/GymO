@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController {
         }
         print("view loaded for \(profileDisplayed?.name)")
        updateUI()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -45,6 +45,17 @@ class Profile {
         self.email = email
         self.id = UUID.init(uuidString: id)!
     }*/
+    
+    func getAllRequestSender() -> [String] {
+        
+        var allRequestSender: [String] = []
+        
+        for requestSenders in addedBy {
+            allRequestSender.append(requestSenders.id)
+        }
+        
+        return allRequestSender
+    }
 }
 
 struct RequestSender {
