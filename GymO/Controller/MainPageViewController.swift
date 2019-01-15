@@ -16,7 +16,6 @@ class MainPageViewController: PageboyViewController {
     
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var profileView: UIView!
     
@@ -26,6 +25,10 @@ class MainPageViewController: PageboyViewController {
         var viewControllers = [UIViewController]()
         for i in 0 ..< ProfileStore.shared.numberOfProfiles(){
             viewControllers.append(makeProfileViewController(at: i))
+            let currentVC = viewControllers[i] as! ProfileViewController
+            let profileDisplay = ProfileStore.shared.getProfile(at: i)
+            profileDisplay.displayVC = currentVC
+            
         }
 
         return viewControllers
@@ -45,12 +48,18 @@ class MainPageViewController: PageboyViewController {
     
         super.viewDidLoad()
         
+        matchButton.layer.cornerRadius = 15
+        self.transition = Transition(style: .fade, duration: 1.0)
         
         let currentVC = self
         ProfileStore.shared.instantiateProfileCache(for: AuthProvider.Instance.userID(), view: currentVC)
        
         self.dataSource = self
-        profileView.layer.cornerRadius = 35 //Use Division method for autolayout
+        profileView.layer.cornerRadius = 15
+        
+        ProfileStore.shared.mainPageVC = self
+        
+        //Use Division method for autolayout
         //SHafie image
 //       setPicture(uid: AuthProvider.Instance.userID())
         // Do any additional setup after loading the view.
@@ -66,7 +75,6 @@ class MainPageViewController: PageboyViewController {
         let profileDisplayed = ProfileStore.shared.getProfile(at: index)
                 if profileDisplayed.id != ProfileStore.shared.getCurrentProfile()?.id {
                     nameLabel.text = profileDisplayed.name
-                    ageLabel.text = String(profileDisplayed.age)
                     locationLabel.text = profileDisplayed.location
                 }
         
@@ -77,7 +85,6 @@ class MainPageViewController: PageboyViewController {
 
     func transitioningUI() {
         nameLabel.text = ""
-        ageLabel.text = ""
         locationLabel.text = ""
         matchButton.isHidden = true
     }

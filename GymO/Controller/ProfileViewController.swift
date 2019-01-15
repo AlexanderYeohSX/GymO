@@ -12,26 +12,27 @@ class ProfileViewController: UIViewController {
 
     private var parentVC: MainPageViewController?
     @IBOutlet weak var profileImage: UIImageView!
-    private var profileDisplayed: Profile?
-    var currentIndex: Int?
+    var profileDisplayed: Profile?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parentVC = parentPageboy as? MainPageViewController
-        if let currentIndex = parentVC?.viewControllers.index(of: self) {
-        
-            profileDisplayed = ProfileStore.shared.getProfile(at: currentIndex)
-        } else {
-            print("Error, index not found")
+        guard let currentIndex = parentVC?.viewControllers.index(of: self)
+        else {
+            fatalError("Missing index for profile view controller")
         }
+        
+        profileDisplayed = ProfileStore.shared.getProfile(at: currentIndex)
+        reloadData()
+        
         print("view loaded for \(profileDisplayed?.name)")
-       updateUI()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
 
         parentVC?.updateUI(at: (parentVC?.viewControllers.index(of: self))!)
+        
     }
     
    
@@ -53,13 +54,23 @@ class ProfileViewController: UIViewController {
     
    
     
-    private func updateUI(){
-
-        if profileDisplayed?.gender == "Male" {
-            profileImage.image = UIImage(imageLiteralResourceName: "male-default")
-        } else if profileDisplayed?.gender == "Female" {
-            profileImage.image = UIImage(imageLiteralResourceName: "female-default")
-        }
+    func reloadData(){
+        print("Update UI Reached")
         
+
+        print(profileDisplayed?.name)
+        print(profileDisplayed?.image)
+        if let profilePicture = profileDisplayed?.image {
+            self.profileImage.image = profilePicture
+            print("and updated picture")
+        }
+    }
+    
+    func getDisplayedProfileGender() -> String {
+        return (profileDisplayed?.gender)!
+    }
+    
+    func getDisplayedProfileName() -> String {
+        return (profileDisplayed?.name)!
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseStorage
 
 class Profile {
     
@@ -20,6 +21,8 @@ class Profile {
     var gender: String
     var matchedUsers: [String] = []
     var addedBy = [RequestSender]()
+    var image: UIImage?
+    var displayVC: ProfileViewController?
 //["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
 //    var description: String?
     
@@ -40,6 +43,7 @@ class Profile {
         self.gender = gender
         self.id = id //MIGHT FAIL DUE TO NO CURRENT USER/NO INTERNET
         self.email = AuthProvider.Instance.userEmail() //MIGHT FAIL DUE TO NO CURRENT USER/NO INTERNET
+        downloadImageForProfile()
     }
     /*init(email: String, id: String) {
         self.email = email
@@ -56,6 +60,46 @@ class Profile {
         
         return allRequestSender
     }
+    
+    func downloadImageForProfile() {
+        
+        let storageRef = Storage.storage().reference()
+        let imagesRef = storageRef.child("images")
+        let userID = id
+        let userRef = imagesRef.child(userID)
+        let fileName = userID  + "-00.jpg"
+        let fileRef = userRef.child(fileName)
+        
+        print("Downloaded image called")
+        //Download file with maxsize of 30MB
+        fileRef.getData(maxSize: 30 * 1024 * 1024) { (data, error) in
+            
+            var profileImage: UIImage?
+            
+            if let downloadedData = data {
+                profileImage = UIImage(data: downloadedData)
+            } else {
+                
+                let profileGender = self.gender
+                
+                if profileGender == "Male" {
+                    profileImage = UIImage(imageLiteralResourceName: "male-default")
+                } else if profileGender == "Female" {
+                    profileImage = UIImage(imageLiteralResourceName: "female-default")
+                } else {
+                    fatalError("No image downloaded and no gender/ profile view error")
+                }
+            }
+            
+            print("in Profile")
+            print("Downloaded image")
+            print(self.name)
+            self.image = profileImage
+            print(self.image)
+            self.displayVC?.reloadData()
+        }
+    }
+
 }
 
 struct RequestSender {

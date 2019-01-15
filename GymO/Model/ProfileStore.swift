@@ -18,6 +18,7 @@ class ProfileStore {
     private let dbRefForUsers = Database.database().reference().child("users")
     private var addedProfilesCache = [Profile]()
     private var requestProfilesCache = [Profile]()
+    var mainPageVC: MainPageViewController?
     
     init(){}
     
@@ -63,6 +64,10 @@ class ProfileStore {
         return currentProfile
     }
     
+    func setDisplayProfileViewController(index: Int, vc: ProfileViewController){
+        
+        profilesCache[index].displayVC = vc
+    }
     
     func addMatchedBuddy(id: String) {
         
@@ -139,19 +144,20 @@ class ProfileStore {
         requestProfilesCache = []
     }
     
-    func queryDatabase(profileDict: NSDictionary, profileType: ProfileType) {
-        for profiles in profileDict {
+    func queryDatabase(profileDict: NSDictionary, profileType: ProfileType) { //1
+        for profiles in profileDict {//2
             
             let currentID = profiles.key as! String
             let value2 = profiles.value as? NSDictionary
-            if let profile = value2 {
+            if let profile = value2 { //3
                 if let age = profile["age"] ,
                     let name = profile["name"] ,
                     let location = profile["location"] ,
                     let gender = profile["gender"],
                     let id = profile["id"]
-                {
-                    switch profileType{
+                { //4
+                    
+                    switch profileType { //5
                     case .currentUser:
                         
                         if currentID == AuthProvider.Instance.userID() {
@@ -209,29 +215,29 @@ class ProfileStore {
                                                                   id: id as! String))
                             } else if (allRequestSenders?.contains(currentID))!{
                                 requestProfilesCache.append(Profile(name: name as! String,
-                                                                  age: age as! Int,
-                                                                  location: location as! String,
-                                                                  gender: gender as! String,
-                                                                  id: id as! String))
+                                                                    age: age as! Int,
+                                                                    location: location as! String,
+                                                                    gender: gender as! String,
+                                                                    id: id as! String))
                                 print("added \(name as! String)")
                             }
                             
-                                
                             else if currentID != AuthProvider.Instance.userID() {
                                 self.profilesCache.append(Profile(name: name as! String,
                                                                   age: age as! Int,
                                                                   location: location as! String,
                                                                   gender: gender as! String,
                                                                   id: id as! String))
-                            }
-                        }
-                     
-                    }
-                }
-            }
-        }
-    }
+                            } //7
+                        } //6
+                    } //5
+                } //4
+            } //3
+        } //2
+    } //1
     
+    
+    //NEED TO CHANGE TO TALLY WITH func updateCurrentProfileDb
     func uploadImageForCurrentUser(with image: UIImage) {
         let storageRef = Storage.storage().reference()
         let imagesRef = storageRef.child("images")
@@ -245,14 +251,12 @@ class ProfileStore {
         
         // Upload the file to the firebase
         if let data = data {
-            print("a")
             let uploadTask = fileRef.putData(data, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     print(error!)
                     return
                 }
-                print(metadata)
                 // Metadata contains file metadata such as size, content-type.
                 // You can also access to download URL after upload.
             }
@@ -264,10 +268,9 @@ class ProfileStore {
                 
                 print(percentComplete)
             }
-            
-            
         }
     }
+    
 }
 
 enum ProfileType {
