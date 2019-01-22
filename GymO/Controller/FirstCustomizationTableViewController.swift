@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstCustomizationTableTViewController: UITableViewController {
+class FirstCustomizationTableViewController: UITableViewController {
 
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var age: UITextField!
@@ -35,9 +35,6 @@ class FirstCustomizationTableTViewController: UITableViewController {
             
             print("Error Doing First Time Customization")
         }
-        
-
-   
     }
     
     

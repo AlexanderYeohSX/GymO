@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6015032E21DD07C600CDF981 /* FirstCustomizationTableTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015032D21DD07C600CDF981 /* FirstCustomizationTableTViewController.swift */; };
-		6015033021DD15B900CDF981 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015032F21DD15B900CDF981 /* MainTabBarController.swift */; };
+		6015032E21DD07C600CDF981 /* FirstCustomizationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6015032D21DD07C600CDF981 /* FirstCustomizationTableViewController.swift */; };
 		60166CA921EB7774003B747D /* MainPageNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60166CA821EB7774003B747D /* MainPageNavigationViewController.swift */; };
 		601DEA8621B41BF800D134BD /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DEA8521B41BF800D134BD /* MainPageViewController.swift */; };
 		6034A8BB21D1F895000D9EDE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034A8BA21D1F895000D9EDE /* ProfileViewController.swift */; };
 		6034A8BD21D1F8D9000D9EDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6034A8BC21D1F8D9000D9EDE /* Default-568h@2x.png */; };
 		6034A8BF21D210EC000D9EDE /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034A8BE21D210EC000D9EDE /* ProfileStore.swift */; };
 		6037DAC221E1D8F4002A582D /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6037DAC121E1D8F4002A582D /* OpenSans-Semibold.ttf */; };
-		6037DAC621E4DFD2002A582D /* NotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6037DAC521E4DFD2002A582D /* NotificationTableViewController.swift */; };
 		6037DACA21E6438D002A582D /* Candara-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6037DAC921E6438C002A582D /* Candara-Bold.ttf */; };
 		6037DACC21E6439D002A582D /* SegoeUI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6037DACB21E6439D002A582D /* SegoeUI.ttf */; };
 		6055ADD621ECC884009F79B3 /* SegoeUI-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6055ADD521ECC884009F79B3 /* SegoeUI-Semibold.ttf */; };
 		6055ADD821ECD9A1009F79B3 /* SegoeUI-Semilight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6055ADD721ECD9A1009F79B3 /* SegoeUI-Semilight.ttf */; };
+		6055ADDB21EE1F43009F79B3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6055ADDA21EE1F43009F79B3 /* GradientView.swift */; };
 		6062E97121D4F6D400A0AB32 /* ChatHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062E97021D4F6D400A0AB32 /* ChatHomeTableViewController.swift */; };
 		60EE8D5321D4F94E00CAB1CA /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EE8D5221D4F94E00CAB1CA /* ChatViewController.swift */; };
 		60EE8D5521D4FA1600CAB1CA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EE8D5421D4FA1600CAB1CA /* Message.swift */; };
@@ -69,8 +68,7 @@
 		3FDDBFBA2363550B811A1768 /* Pods_GymO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		456B08C6C4105B4453E39FC0 /* Pods_GymOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A1E1C8FF6D7314948003EB /* Pods-GymO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymO.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymO/Pods-GymO.release.xcconfig"; sourceTree = "<group>"; };
-		6015032D21DD07C600CDF981 /* FirstCustomizationTableTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCustomizationTableTViewController.swift; sourceTree = "<group>"; };
-		6015032F21DD15B900CDF981 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		6015032D21DD07C600CDF981 /* FirstCustomizationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCustomizationTableViewController.swift; sourceTree = "<group>"; };
 		60166CA821EB7774003B747D /* MainPageNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageNavigationViewController.swift; sourceTree = "<group>"; };
 		601DEA8521B41BF800D134BD /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		6034A8BA21D1F895000D9EDE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -78,11 +76,11 @@
 		6034A8BE21D210EC000D9EDE /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		6037DAC021E1D639002A582D /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		6037DAC121E1D8F4002A582D /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		6037DAC521E4DFD2002A582D /* NotificationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewController.swift; sourceTree = "<group>"; };
 		6037DAC921E6438C002A582D /* Candara-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Candara-Bold.ttf"; sourceTree = "<group>"; };
 		6037DACB21E6439D002A582D /* SegoeUI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoeUI.ttf; sourceTree = "<group>"; };
 		6055ADD521ECC884009F79B3 /* SegoeUI-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SegoeUI-Semibold.ttf"; sourceTree = "<group>"; };
 		6055ADD721ECD9A1009F79B3 /* SegoeUI-Semilight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SegoeUI-Semilight.ttf"; sourceTree = "<group>"; };
+		6055ADDA21EE1F43009F79B3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		6062E97021D4F6D400A0AB32 /* ChatHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHomeTableViewController.swift; sourceTree = "<group>"; };
 		60EE8D5221D4F94E00CAB1CA /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		60EE8D5421D4FA1600CAB1CA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -186,10 +184,9 @@
 				601DEA8521B41BF800D134BD /* MainPageViewController.swift */,
 				6034A8BA21D1F895000D9EDE /* ProfileViewController.swift */,
 				6062E97021D4F6D400A0AB32 /* ChatHomeTableViewController.swift */,
-				6037DAC521E4DFD2002A582D /* NotificationTableViewController.swift */,
 				60EE8D5221D4F94E00CAB1CA /* ChatViewController.swift */,
-				6015032F21DD15B900CDF981 /* MainTabBarController.swift */,
-				6015032D21DD07C600CDF981 /* FirstCustomizationTableTViewController.swift */,
+				6055ADDA21EE1F43009F79B3 /* GradientView.swift */,
+				6015032D21DD07C600CDF981 /* FirstCustomizationTableViewController.swift */,
 				60166CA821EB7774003B747D /* MainPageNavigationViewController.swift */,
 				C111B21821A856BC0023A3E7 /* EditTableViewController.swift */,
 			);
@@ -512,7 +509,6 @@
 			files = (
 				C111B21721A855890023A3E7 /* LoginViewController.swift in Sources */,
 				C1ABA71921A7010600326D4C /* MasterViewController(Deprecated).swift in Sources */,
-				6015033021DD15B900CDF981 /* MainTabBarController.swift in Sources */,
 				C1EB68E221A5A0E100062B29 /* AuthProvider.swift in Sources */,
 				60EE8D5721D4FB8900CAB1CA /* MessageStore.swift in Sources */,
 				60EE8D5521D4FA1600CAB1CA /* Message.swift in Sources */,
@@ -520,15 +516,15 @@
 				601DEA8621B41BF800D134BD /* MainPageViewController.swift in Sources */,
 				6062E97121D4F6D400A0AB32 /* ChatHomeTableViewController.swift in Sources */,
 				C1EB68E921A5A4D600062B29 /* DBProvider.swift in Sources */,
-				6037DAC621E4DFD2002A582D /* NotificationTableViewController.swift in Sources */,
 				C1EB68EE21A5A50A00062B29 /* Contact.swift in Sources */,
 				C111B21B21A909A30023A3E7 /* SignUpViewController.swift in Sources */,
+				6055ADDB21EE1F43009F79B3 /* GradientView.swift in Sources */,
 				C111B21921A856BC0023A3E7 /* EditTableViewController.swift in Sources */,
 				C1EB68ED21A5A50A00062B29 /* Constants.swift in Sources */,
 				60EE8D5321D4F94E00CAB1CA /* ChatViewController.swift in Sources */,
 				6034A8BF21D210EC000D9EDE /* ProfileStore.swift in Sources */,
 				C134BDF021904D9700F1319B /* AppDelegate.swift in Sources */,
-				6015032E21DD07C600CDF981 /* FirstCustomizationTableTViewController.swift in Sources */,
+				6015032E21DD07C600CDF981 /* FirstCustomizationTableViewController.swift in Sources */,
 				6034A8BB21D1F895000D9EDE /* ProfileViewController.swift in Sources */,
 				C1ABA71721A7010600326D4C /* MainPageViewController(Deprecated).swift in Sources */,
 				C134BE1E21904DCF00F1319B /* Profile.swift in Sources */,

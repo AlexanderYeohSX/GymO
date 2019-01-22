@@ -21,7 +21,8 @@ class Profile {
     var gender: String
     var matchedUsers: [String] = []
     var addedBy = [RequestSender]()
-    var image: UIImage?
+    var picturesForProfile: [UIImage] = []
+    var numberOfPictures: Int?
     var displayVC: ProfileViewController?
 //["pegODobZloOh11fLcOvkd5EFh692","XEeLsAUSuSXlvkYoRqR9w1DcDr53","n0W9760m58Y2ny73WGeJaqXoSZ22","NFAe92cZScaHBSjdmI1sdU3tQJG2","cmsHhI8FinP9SdZjZsvICMgn86i2"] // Testing
 //    var description: String?
@@ -94,8 +95,10 @@ class Profile {
             print("in Profile")
             print("Downloaded image")
             print(self.name)
-            self.image = profileImage
-            print(self.image)
+            if let obtainedImage = profileImage{
+                self.picturesForProfile.append(obtainedImage)
+            }
+            print(self.picturesForProfile)
             self.displayVC?.reloadData()
         }
     }

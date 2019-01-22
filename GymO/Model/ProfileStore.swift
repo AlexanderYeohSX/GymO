@@ -112,7 +112,10 @@ class ProfileStore {
             dbRefForUsers.child(uid).child("location").setValue(currentProfile?.location)
         case .matchedUsers:
             dbRefForUsers.child(uid).child("matchedUsers").setValue(currentProfile?.matchedUsers)
+        case .numberOfPictures:        dbRefForUsers.child(uid).child("numberOfPictures").setValue(currentProfile?.picturesForProfile.count)
+            //need to be changed later due to unsafe coding (this value will not tally wiht total amount of images available online if the image has not been completely downloaded before uploading)
         }
+        
     }
 
     func updateMatchedProfileDb(id: String) {
@@ -244,13 +247,17 @@ class ProfileStore {
         let userID = AuthProvider.Instance.userID()
         let userRef = imagesRef.child(userID)
         let data = image.jpegData(compressionQuality: 1.0)
-        let fileName = userID  + "-00.jpg"
+        //THis line of code will allow continuous adding of pictures
+        let numberOfPictures = currentProfile?.picturesForProfile.count
+        let fileName = userID  + "-0\(numberOfPictures!).jpg"
         let fileRef = userRef.child(fileName)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
         // Upload the file to the firebase
         if let data = data {
+            
+            currentProfile?.picturesForProfile.append(image)
             let uploadTask = fileRef.putData(data, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
@@ -270,7 +277,6 @@ class ProfileStore {
             }
         }
     }
-    
 }
 
 enum ProfileType {
@@ -342,4 +348,5 @@ enum ProfileProperty {
     case email
     case id
     case matchedUsers
+    case numberOfPictures
 }

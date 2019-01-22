@@ -17,9 +17,13 @@ class MainPageViewController: PageboyViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var profileView: UIScrollView!
+    @IBOutlet weak var bottomScrollView: UIView!
     
     @IBOutlet weak var matchButton: UIButton!
+    
+    @IBOutlet weak var photoCollectionView: UICollectionView!
+    
     
     lazy var viewControllers: [UIViewController] = {
         var viewControllers = [UIViewController]()
@@ -55,9 +59,12 @@ class MainPageViewController: PageboyViewController {
         ProfileStore.shared.instantiateProfileCache(for: AuthProvider.Instance.userID(), view: currentVC)
        
         self.dataSource = self
-        profileView.layer.cornerRadius = 15
+        bottomScrollView.layer.cornerRadius = 15
         
         ProfileStore.shared.mainPageVC = self
+        profileView.delegate = self
+        
+        photoCollectionView.dataSource = self
         
         //Use Division method for autolayout
         //SHafie image
@@ -170,6 +177,20 @@ extension MainPageViewController: PageboyViewControllerDelegate {
     func pageboyViewController(_ pageboyViewController: PageboyViewController, didReloadWith currentViewController: UIViewController, currentPageIndex: PageboyViewController.PageIndex) {
         
     }
+    
+}
+
+extension MainPageViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath)
+        return cell
+    }
+    
+    
     
 }
 
