@@ -59,8 +59,7 @@ class ProfileViewController: UIViewController {
         
 
         print(profileDisplayed?.name)
-        print(profileDisplayed?.picturesForProfile)
-        if let profilePicture = profileDisplayed?.picturesForProfile.first {
+        if let profilePicture = profileDisplayed?.profileImage {
             self.profileImage.image = profilePicture
             print("and updated picture")
         }

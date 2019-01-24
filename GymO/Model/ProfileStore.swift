@@ -84,38 +84,42 @@ class ProfileStore {
     
     func setupCurrentProfileDb() {
     
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("name").setValue(currentProfile?.name)
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("age").setValue(currentProfile?.age)
-    dbRefForUsers.child(AuthProvider.Instance.userID()).child("location").setValue(currentProfile?.location)
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("gender").setValue(currentProfile?.gender)
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("email").setValue(currentProfile?.email)
-        dbRefForUsers.child(AuthProvider.Instance.userID()).child("id").setValue(currentProfile?.id)
+        dbRefForUsers.child((currentProfile?.id)!).child("name").setValue(currentProfile?.name)
+        dbRefForUsers.child((currentProfile?.id)!).child("age").setValue(currentProfile?.age)
+    dbRefForUsers.child((currentProfile?.id)!).child("location").setValue(currentProfile?.location)
+        dbRefForUsers.child((currentProfile?.id)!).child("gender").setValue(currentProfile?.gender)
+        dbRefForUsers.child((currentProfile?.id)!).child("email").setValue(currentProfile?.email)
+        dbRefForUsers.child((currentProfile?.id)!).child("id").setValue(currentProfile?.id)
         
     }
     
     func updateCurrentProfileDb(for property: ProfileProperty){
         
-        let uid = AuthProvider.Instance.userID()
+        let uid = currentProfile?.id
         
         switch property{
         case .name:
-            dbRefForUsers.child(uid).child("name").setValue(currentProfile?.name)
+            dbRefForUsers.child(uid!).child("name").setValue(currentProfile?.name)
         case .age:
-            dbRefForUsers.child(uid).child("age").setValue(currentProfile?.age)
+            dbRefForUsers.child(uid!).child("age").setValue(currentProfile?.age)
         case .email:
-            dbRefForUsers.child(uid).child("email").setValue(currentProfile?.email)
+            dbRefForUsers.child(uid!).child("email").setValue(currentProfile?.email)
         case .gender:
-            dbRefForUsers.child(uid).child("gender").setValue(currentProfile?.gender)
+            dbRefForUsers.child(uid!).child("gender").setValue(currentProfile?.gender)
         case .id:
-            dbRefForUsers.child(uid).child("id").setValue(currentProfile?.id)
+            dbRefForUsers.child(uid!).child("id").setValue(currentProfile?.id)
         case .location:
-            dbRefForUsers.child(uid).child("location").setValue(currentProfile?.location)
+            dbRefForUsers.child(uid!).child("location").setValue(currentProfile?.location)
         case .matchedUsers:
-            dbRefForUsers.child(uid).child("matchedUsers").setValue(currentProfile?.matchedUsers)
-        case .numberOfPictures:        dbRefForUsers.child(uid).child("numberOfPictures").setValue(currentProfile?.picturesForProfile.count)
-            //need to be changed later due to unsafe coding (this value will not tally wiht total amount of images available online if the image has not been completely downloaded before uploading)
+            dbRefForUsers.child(uid!).child("matchedUsers").setValue(currentProfile?.matchedUsers)
+        case .numberOfPictures:        dbRefForUsers.child(uid!).child("numberOfPictures").setValue(currentProfile?.numberOfPictures)
         }
+    }
+    
+    func updateCurrentProfilePictureURL(pictureURL: String, tag: String){
+        let uid = currentProfile?.id
         
+        dbRefForUsers.child(uid!).child("picturesDownloadURL").child(tag).setValue(pictureURL)
     }
 
     func updateMatchedProfileDb(id: String) {
@@ -157,7 +161,8 @@ class ProfileStore {
                     let name = profile["name"] ,
                     let location = profile["location"] ,
                     let gender = profile["gender"],
-                    let id = profile["id"]
+                    let id = profile["id"],
+                    let numberOfPictures = profile["numberOfPictures"]
                 { //4
                     
                     switch profileType { //5
@@ -168,7 +173,8 @@ class ProfileStore {
                                                           age: age as! Int,
                                                           location: location as! String,
                                                           gender: gender as! String,
-                                                          id: id as! String)
+                                                          id: id as! String,
+                                                          numberOfPictures: numberOfPictures as! Int)
                             if let matchedUsers = profile["matchedUsers"] {
                                 self.currentProfile?.matchedUsers = matchedUsers as! [String]
                             }
@@ -215,13 +221,14 @@ class ProfileStore {
                                                                   age: age as! Int,
                                                                   location: location as! String,
                                                                   gender: gender as! String,
-                                                                  id: id as! String))
+                                                                  id: id as! String, numberOfPictures: numberOfPictures as! Int))
                             } else if (allRequestSenders?.contains(currentID))!{
                                 requestProfilesCache.append(Profile(name: name as! String,
                                                                     age: age as! Int,
                                                                     location: location as! String,
                                                                     gender: gender as! String,
-                                                                    id: id as! String))
+                                                                    id: id as! String,
+                                                                    numberOfPictures: numberOfPictures as! Int))
                                 print("added \(name as! String)")
                             }
                             
@@ -230,7 +237,8 @@ class ProfileStore {
                                                                   age: age as! Int,
                                                                   location: location as! String,
                                                                   gender: gender as! String,
-                                                                  id: id as! String))
+                                                                  id: id as! String,
+                                                                  numberOfPictures: numberOfPictures as! Int))
                             } //7
                         } //6
                     } //5
@@ -248,22 +256,33 @@ class ProfileStore {
         let userRef = imagesRef.child(userID)
         let data = image.jpegData(compressionQuality: 1.0)
         //THis line of code will allow continuous adding of pictures
-        let numberOfPictures = currentProfile?.picturesForProfile.count
-        let fileName = userID  + "-0\(numberOfPictures!).jpg"
-        let fileRef = userRef.child(fileName)
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
+       
         
         // Upload the file to the firebase
         if let data = data {
             
+            currentProfile?.numberOfPictures = (currentProfile?.numberOfPictures)! + 1
+            let numberOfPictures =  currentProfile?.numberOfPictures
+            let fileName = userID  + "-0\(numberOfPictures!).jpg"
+            let fileRef = userRef.child(fileName)
+            let metadata = StorageMetadata()
+            
+            
+            metadata.contentType = "image/jpeg"
+            metadata.customMetadata = ["tag": "\(numberOfPictures!)"]
             currentProfile?.picturesForProfile.append(image)
+            updateCurrentProfileDb(for: .numberOfPictures)
+            
             let uploadTask = fileRef.putData(data, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     print(error!)
                     return
                 }
+                
+                
+                
+                
                 // Metadata contains file metadata such as size, content-type.
                 // You can also access to download URL after upload.
             }
@@ -274,6 +293,26 @@ class ProfileStore {
                     / Double(snapshot.progress!.totalUnitCount)
                 
                 print(percentComplete)
+            }
+            
+            uploadTask.observe(.success) { (snapshot) in
+                
+                snapshot.reference.downloadURL(completion: { (url, error) in
+        
+                    guard let tag = snapshot.metadata?.customMetadata!["tag"] else {
+                        fatalError("no tag for snapshot")
+                    }
+                    
+                    let downloadURL = url
+                    print(tag)
+                    print(downloadURL?.absoluteString)
+                    self.updateCurrentProfilePictureURL(pictureURL: (downloadURL?.absoluteString)!, tag: tag)
+                })
+            }
+            
+            uploadTask.observe(.failure) { snapshot in
+                self.currentProfile?.numberOfPictures = (self.currentProfile?.numberOfPictures)! - 1
+                self.updateCurrentProfileDb(for: .numberOfPictures)
             }
         }
     }

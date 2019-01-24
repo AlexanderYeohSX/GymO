@@ -25,7 +25,8 @@ class FirstCustomizationTableViewController: UITableViewController {
                         age: Int(age.text!)!,
                         location: location.text!,
                         gender: gender.text!,
-                        id: AuthProvider.Instance.userID()
+                        id: AuthProvider.Instance.userID(),
+                        numberOfPictures: (ProfileStore.shared.getCurrentProfile()?.picturesForProfile.count)!
             ))
             
             ProfileStore.shared.setupCurrentProfileDb()
