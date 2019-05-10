@@ -9,12 +9,12 @@
 import UIKit
 import Firebase
 
-
 class SignUpViewController: UIViewController {
     
     private let loginSegue = "LoginSegue"
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet var textLabelViews: [UIView]!
     
@@ -36,7 +36,6 @@ class SignUpViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         view.addGestureRecognizer(tap)
     }
-    
     
     
     @IBAction func signUp(_ sender: Any) {
@@ -62,23 +61,13 @@ class SignUpViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     private func alertUser(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -88,5 +77,4 @@ extension SignUpViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
 }

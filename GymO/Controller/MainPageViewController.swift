@@ -37,15 +37,14 @@ class MainPageViewController: PageboyViewController {
             profileDisplay.displayVC = currentVC
             
         }
-        
         return viewControllers
     }()
-    
     
     @IBAction func matchButtonPressed(_ sender: UIButton) {
         
         ProfileStore.shared.addMatchedBuddy(id: ProfileStore.shared.getProfile(at: sender.tag).id)
         self.performSegue(withIdentifier: "GoToChat", sender: sender)
+
         
     }
     
@@ -60,7 +59,7 @@ class MainPageViewController: PageboyViewController {
         
         let currentVC = self
         ProfileStore.shared.instantiateProfileCache(for: AuthProvider.Instance.userID(), view: currentVC)
-        
+
         self.dataSource = self
         bottomScrollView.layer.cornerRadius = 15
         
@@ -71,9 +70,7 @@ class MainPageViewController: PageboyViewController {
         
         //Use Division method for autolayout
         //SHafie image
-        //       setPicture(uid: AuthProvider.Instance.userID())
-        // Do any additional setup after loading the view.
-        
+
     }
     
     func makeProfileViewController(at index: Int?) -> ProfileViewController {
@@ -87,14 +84,15 @@ class MainPageViewController: PageboyViewController {
             nameLabel.text = profileDisplayed.name
             locationLabel.text = profileDisplayed.location
         }
+
         
         matchButton.isHidden = false
         matchButton.tag = index
-        
         updateCollectionView()
         
     }
     
+
     func transitioningUI() {
         nameLabel.text = ""
         locationLabel.text = ""
@@ -119,7 +117,7 @@ class MainPageViewController: PageboyViewController {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-     */
+     
     
     // Funtion to insert picture from Firebase
     //    func setPicture (uid: String) {
@@ -143,6 +141,8 @@ class MainPageViewController: PageboyViewController {
     //            }
     //        }
     //    }
+
+    */
 }
 
 extension MainPageViewController: PageboyViewControllerDataSource {
@@ -156,7 +156,7 @@ extension MainPageViewController: PageboyViewControllerDataSource {
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
         
         return viewControllers[index]
-        
+
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
@@ -210,6 +210,7 @@ extension MainPageViewController: UICollectionViewDataSource{
         collectionViewRef?.reloadData()
         
     }
+
     
     
 }

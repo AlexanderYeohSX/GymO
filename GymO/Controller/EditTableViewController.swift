@@ -55,13 +55,12 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
             print("photo library unavailable")
             return
         }
-        
-        
+
         print("upload Photo Library")
     }
     
     @IBAction func updateProfile(_ sender: Any) {
-        
+
         
         //NOTE: Force unwrapping Int()! for age will be dangerous in the future
         ProfileStore.shared.setCurrentProfile(as:
@@ -75,6 +74,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
         
         ProfileStore.shared.setupCurrentProfileDb()
         
+
         //      OLD CODES//        let encoder = JSONEncoder()
         //
         //        do {
@@ -86,6 +86,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
         //            print(error)
         //            return
         //        }
+
         
     }
     
@@ -95,7 +96,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
             ProfileStore.shared.clearSession()
             
             dismiss(animated: true, completion: nil)
-            
+
         } else {
             alertUser(title: "Could Not Logged Out", message: "Please Try Again Later")
         }
@@ -105,8 +106,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
+
     private func alertUser(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -115,6 +115,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     }
     
     // NO USE DAO
+
     //    func jsonToString(json: AnyObject){
     //        do {
     //            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
@@ -131,6 +132,7 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
         
         var image:UIImage
         
+
         
         //To append to editedImage after not using simulator
         if info[.editedImage] == nil {
@@ -149,7 +151,9 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
             image = imageObtained
         }
         
+
         print(image.size)
+
         // print out the image size as a test
         
         ProfileStore.shared.uploadImageForCurrentUser(with: image)
@@ -159,5 +163,6 @@ class EditTableViewController: UITableViewController, UINavigationControllerDele
     
     func uploadImage(image: UIImage) {
         
+
     }
 }

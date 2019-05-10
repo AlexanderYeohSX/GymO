@@ -40,7 +40,7 @@ class ProfileStore {
         }
         return nil
     }
-    
+
     func getMatchedProfile(for id: String) -> Profile? {
         for profiles in addedProfilesCache {
             if profiles.id == id {
@@ -50,6 +50,7 @@ class ProfileStore {
         return nil
     }
     
+
     func getRequestedProfile(for id: String) -> Profile? {
         
         for profiles in requestProfilesCache {
@@ -85,7 +86,7 @@ class ProfileStore {
                 return
             }
         }
-        
+
         currentProfile?.matchedUsers.append(id)
         updateCurrentProfileDb(for: .matchedUsers)
         updateMatchedProfileDb(id: id)
@@ -96,6 +97,7 @@ class ProfileStore {
         dbRefForUsers.child((currentProfile?.id)!).child("name").setValue(currentProfile?.name)
         dbRefForUsers.child((currentProfile?.id)!).child("age").setValue(currentProfile?.age)
         dbRefForUsers.child((currentProfile?.id)!).child("location").setValue(currentProfile?.location)
+
         dbRefForUsers.child((currentProfile?.id)!).child("gender").setValue(currentProfile?.gender)
         dbRefForUsers.child((currentProfile?.id)!).child("email").setValue(currentProfile?.email)
         dbRefForUsers.child((currentProfile?.id)!).child("id").setValue(currentProfile?.id)
@@ -121,8 +123,10 @@ class ProfileStore {
             dbRefForUsers.child(uid!).child("location").setValue(currentProfile?.location)
         case .matchedUsers:
             dbRefForUsers.child(uid!).child("matchedUsers").setValue(currentProfile?.matchedUsers)
+
         case .numberOfPictures:
             dbRefForUsers.child(uid!).child("numberOfPictures").setValue(currentProfile?.numberOfPictures)
+
         }
     }
     
@@ -131,7 +135,7 @@ class ProfileStore {
         
         dbRefForUsers.child(uid!).child("picturesDownloadURL").child(tag).setValue(pictureURL)
     }
-    
+
     func updateMatchedProfileDb(id: String) {
         
         let date = Date()
@@ -149,6 +153,7 @@ class ProfileStore {
                 
             }
             print("main view loaded for \(ProfileStore.shared.getCurrentProfile()?.name)")
+
             view.reloadData()
         }
     }
@@ -193,6 +198,7 @@ class ProfileStore {
                                 for addedByUsers in addedBy {
                                     
                                     let addedByUserID = addedByUsers.key as! String
+
                                     let value3 = addedByUsers.value as? NSDictionary
                                     if let addedByUser = value3 {
                                         guard let dateAdded = addedByUser["date"] else {
@@ -210,6 +216,7 @@ class ProfileStore {
                                         }
                                         
                                         self.currentProfile?.addedBy.append(requestSender)
+
                                         
                                     }
                                     
@@ -223,7 +230,6 @@ class ProfileStore {
                                 
                                 
                             }
-                            
                             
                         }
                     case .notCurrentUser:
@@ -254,6 +260,7 @@ class ProfileStore {
                                 
                             else if currentID != AuthProvider.Instance.userID() {
                                 self.profilesCache.append(profileQueried)
+
                             } //7
                         } //6
                     } //5
@@ -271,11 +278,10 @@ class ProfileStore {
         let userRef = imagesRef.child(userID)
         let data = image.jpegData(compressionQuality: 1.0)
         //THis line of code will allow continuous adding of pictures
-        
+
         
         // Upload the file to the firebase
         if let data = data {
-            
             
             let numberOfPictures =  currentProfile?.numberOfPictures
             let fileName = userID  + "-0\(numberOfPictures!).jpg"
@@ -286,7 +292,9 @@ class ProfileStore {
             metadata.contentType = "image/jpeg"
             metadata.customMetadata = ["tag": "\(numberOfPictures!)"]
             currentProfile?.picturesForProfile.append(image)
+
             currentProfile?.numberOfPictures = (currentProfile?.numberOfPictures)! + 1
+
             updateCurrentProfileDb(for: .numberOfPictures)
             
             let uploadTask = fileRef.putData(data, metadata: metadata) { (metadata, error) in
@@ -304,7 +312,7 @@ class ProfileStore {
             }
             
             uploadTask.observe(.progress) { (snapshot) in
-                
+
                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
                     / Double(snapshot.progress!.totalUnitCount)
                 
@@ -314,16 +322,18 @@ class ProfileStore {
             uploadTask.observe(.success) { (snapshot) in
                 
                 snapshot.reference.downloadURL(completion: { (url, error) in
-                    
+
                     guard let tag = snapshot.metadata?.customMetadata!["tag"] else {
                         fatalError("no tag for snapshot")
                     }
                     
+
                     let downloadURL = url?.absoluteString
                     print(tag)
                     print(downloadURL)
                     self.updateCurrentProfilePictureURL(pictureURL: (downloadURL)!, tag: tag)
                     self.currentProfile?.picturesDownloadURL.append(downloadURL!)
+
                 })
             }
             

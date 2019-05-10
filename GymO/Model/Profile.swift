@@ -11,6 +11,7 @@ import UIKit
 import FirebaseStorage
 import SDWebImage
 
+
 class Profile {
     
     var email: String = ""
@@ -18,6 +19,7 @@ class Profile {
     var name: String
     var age: Int
     //    var experience: String = ""
+
     var location: String?
     var gender: String
     var matchedUsers: [String] = []
@@ -44,6 +46,7 @@ class Profile {
      try? Profile.shared.setImage(id: self.id!, image: newValue)
      }
      }*/
+
     
     init (name: String, age: Int, location: String, gender: String, id: String, numberOfPictures: Int) {
         
@@ -61,6 +64,7 @@ class Profile {
      self.email = email
      self.id = UUID.init(uuidString: id)!
      }*/
+
     
     func getAllRequestSender() -> [String] {
         
@@ -74,6 +78,7 @@ class Profile {
     }
     
     func downloadImageForProfile() {
+
         
         if numberOfPictures > 0 {
             
@@ -104,6 +109,7 @@ class Profile {
 //
 //                task.resume()
             }
+
         } else {
             
             let profileGender = self.gender
@@ -146,7 +152,6 @@ class Profile {
         //            }
         //        }
     }
-    
 }
 
 struct RequestSender {

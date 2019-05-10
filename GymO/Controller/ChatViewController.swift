@@ -20,7 +20,7 @@ class ChatViewController: MessagesViewController {
     var profileDisplayed: Profile?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -32,6 +32,7 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+
     
     /*
      // MARK: - Navigation
@@ -43,6 +44,7 @@ class ChatViewController: MessagesViewController {
      }
      */
     
+
 }
 
 extension ChatViewController: MessagesDataSource {
@@ -62,7 +64,7 @@ extension ChatViewController: MessagesDataSource {
 }
 
 extension ChatViewController: MessagesLayoutDelegate {
-    
+
 }
 
 extension ChatViewController: MessagesDisplayDelegate {
@@ -102,6 +104,7 @@ extension ChatViewController: MessageInputBarDelegate {
         print(attributedText.string)
         MessageStore.instance.addMessage(message: message)
         messagesCollectionView.insertSections([messages.count - 1])
+
         
         messagesCollectionView.scrollToBottom()
     }

@@ -14,6 +14,7 @@ class Contact {
     
     var name: String {
         return _name
+
     }
     
     var id: String {

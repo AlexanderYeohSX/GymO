@@ -9,7 +9,7 @@
 import UIKit
 
 class FirstCustomizationTableViewController: UITableViewController {
-    
+
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var age: UITextField!
     @IBOutlet weak var experience: UITextField!
@@ -18,7 +18,7 @@ class FirstCustomizationTableViewController: UITableViewController {
     @IBOutlet weak var gender: UITextField!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        
+
         if name.text != "", age.text != "", location.text != "", gender.text != "" {
             ProfileStore.shared.setCurrentProfile(as:
                 Profile(name: name.text!,
@@ -43,8 +43,7 @@ class FirstCustomizationTableViewController: UITableViewController {
         
         
         //NOTE: Force unwrapping Int()! for age will be dangerous in the future
-        
-        
+
     }
     
     
@@ -64,7 +63,7 @@ class FirstCustomizationTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
@@ -124,5 +123,4 @@ class FirstCustomizationTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
 }
