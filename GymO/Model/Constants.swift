@@ -39,4 +39,9 @@ class ViewConstants {
         return (viewHeight - viewHeight/5)/2
         
     }
+    
+    static func cornerRadiusForCircles(viewHeight: CGFloat) -> CGFloat {
+        
+        return viewHeight/2
+    }
 }

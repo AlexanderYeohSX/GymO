@@ -15,6 +15,7 @@ class ChatViewController: MessagesViewController {
     var messages: [Message] {
         return MessageStore.instance.getMessages()
     }
+    
     var receiver: String = "No Receiver"
     var profileDisplayed: Profile?
     override func viewDidLoad() {

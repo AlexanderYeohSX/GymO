@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3B5821812DA0758FEF23BB2C /* Pods_GymO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EB730918B9898A6F50DDFF /* Pods_GymO.framework */; };
 		5C02D1DC4C81A4E7034DDD8E /* Pods_GymOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2167E5FBA9F98DE4330034E4 /* Pods_GymOTests.framework */; };
+		6002F8692281E63100BAA82E /* ChatHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6002F8682281E63100BAA82E /* ChatHomeViewController.swift */; };
+		60549F43227B1DC700187C84 /* Bebas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60549F42227B1D5900187C84 /* Bebas.ttf */; };
+		60549F44227B1EBE00187C84 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6090FF32222C20E700861B39 /* Info.plist */; };
+		6065DE65227B2CEE00A31118 /* FirstTimePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065DE64227B2CEE00A31118 /* FirstTimePreferenceViewController.swift */; };
 		6090FF24222C20E600861B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090FF23222C20E600861B39 /* AppDelegate.swift */; };
 		6090FF29222C20E600861B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6090FF27222C20E600861B39 /* Main.storyboard */; };
 		6090FF2C222C20E600861B39 /* GymO.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6090FF2A222C20E600861B39 /* GymO.xcdatamodeld */; };
@@ -63,6 +67,9 @@
 /* Begin PBXFileReference section */
 		2167E5FBA9F98DE4330034E4 /* Pods_GymOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDE22ADAB13CFE1D106F554 /* Pods-GymOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymOUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymOUITests/Pods-GymOUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6002F8682281E63100BAA82E /* ChatHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHomeViewController.swift; sourceTree = "<group>"; };
+		60549F42227B1D5900187C84 /* Bebas.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bebas.ttf; sourceTree = "<group>"; };
+		6065DE64227B2CEE00A31118 /* FirstTimePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimePreferenceViewController.swift; sourceTree = "<group>"; };
 		6090FF20222C20E600861B39 /* GymO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6090FF23222C20E600861B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6090FF28222C20E600861B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -211,12 +218,14 @@
 				6090FF60222C226300861B39 /* ChatHomeTableViewController.swift */,
 				6090FF62222C226F00861B39 /* FirstCustomizationTableViewController.swift */,
 				6090FF64222C228400861B39 /* EditTableViewController.swift */,
+				6065DE64227B2CEE00A31118 /* FirstTimePreferenceViewController.swift */,
 				6090FF66222C22B200861B39 /* MainPageNavigationViewController.swift */,
 				6090FF54222C21DC00861B39 /* LoginViewController.swift */,
 				6090FF56222C221F00861B39 /* SignUpViewController.swift */,
 				6090FF58222C222D00861B39 /* MainPageViewController.swift */,
 				6090FF5A222C223500861B39 /* ProfileViewController.swift */,
 				6090FF5E222C224200861B39 /* ChatViewController.swift */,
+				6002F8682281E63100BAA82E /* ChatHomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,6 +239,7 @@
 				6090FF84222C235000861B39 /* SegoeUI-Semibold.ttf */,
 				6090FF85222C235000861B39 /* SegoeUI-Semilight.ttf */,
 				6090FF87222C235000861B39 /* SegoeUI.ttf */,
+				60549F42227B1D5900187C84 /* Bebas.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -381,9 +391,11 @@
 				6090FF8D222C235000861B39 /* SegoeUI.ttf in Resources */,
 				6090FF31222C20E700861B39 /* LaunchScreen.storyboard in Resources */,
 				6090FF8B222C235000861B39 /* SegoeUI-Semilight.ttf in Resources */,
+				60549F43227B1DC700187C84 /* Bebas.ttf in Resources */,
 				6090FF2E222C20E700861B39 /* Assets.xcassets in Resources */,
 				6090FF8A222C235000861B39 /* SegoeUI-Semibold.ttf in Resources */,
 				6090FF29222C20E600861B39 /* Main.storyboard in Resources */,
+				60549F44227B1EBE00187C84 /* Info.plist in Resources */,
 				6090FF8F222C23B300861B39 /* GoogleService-Info.plist in Resources */,
 				6090FF8C222C235000861B39 /* OpenSans-Regular.ttf in Resources */,
 				6090FF89222C235000861B39 /* Candara-Bold.ttf in Resources */,
@@ -528,6 +540,7 @@
 				6090FF5B222C223500861B39 /* ProfileViewController.swift in Sources */,
 				6090FF6C222C22EC00861B39 /* DBProvider.swift in Sources */,
 				6090FF76222C230D00861B39 /* Message.swift in Sources */,
+				6002F8692281E63100BAA82E /* ChatHomeViewController.swift in Sources */,
 				6090FF59222C222D00861B39 /* MainPageViewController.swift in Sources */,
 				6090FF5F222C224200861B39 /* ChatViewController.swift in Sources */,
 				6090FF65222C228400861B39 /* EditTableViewController.swift in Sources */,
@@ -539,6 +552,7 @@
 				6090FF78222C231300861B39 /* MessageStore.swift in Sources */,
 				6090FF24222C20E600861B39 /* AppDelegate.swift in Sources */,
 				6090FF72222C22FE00861B39 /* ProfileStore.swift in Sources */,
+				6065DE65227B2CEE00A31118 /* FirstTimePreferenceViewController.swift in Sources */,
 				6090FF6E222C22F400861B39 /* Constants.swift in Sources */,
 				6090FF70222C22F900861B39 /* Contact.swift in Sources */,
 				6090FF57222C221F00861B39 /* SignUpViewController.swift in Sources */,

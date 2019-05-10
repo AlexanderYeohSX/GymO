@@ -41,6 +41,15 @@ class ProfileStore {
         return nil
     }
     
+    func getMatchedProfile(for id: String) -> Profile? {
+        for profiles in addedProfilesCache {
+            if profiles.id == id {
+                return profiles
+            }
+        }
+        return nil
+    }
+    
     func getRequestedProfile(for id: String) -> Profile? {
         
         for profiles in requestProfilesCache {
@@ -201,7 +210,6 @@ class ProfileStore {
                                         }
                                         
                                         self.currentProfile?.addedBy.append(requestSender)
-                                        print( self.currentProfile?.addedBy)
                                         
                                     }
                                     

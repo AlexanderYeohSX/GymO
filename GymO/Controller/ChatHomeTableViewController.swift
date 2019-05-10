@@ -16,11 +16,14 @@ class ChatHomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
     
     // MARK: - Table view data source
@@ -40,8 +43,10 @@ class ChatHomeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "matchedCell", for: indexPath)
         cell.tag = indexPath.row
         
+        
         //CHANGE TO GET ADDED PROFILE
-        cell.textLabel?.text = ProfileStore.shared.getProfile(for: friends[indexPath.row])?.name
+        cell.textLabel?.text = ProfileStore.shared.getMatchedProfile(for: friends[indexPath.row])?.name
+        
         //print(ProfileStore.shared.getProfile(for: friends[indexPath.row])?)
         // Configure the cell...
         
